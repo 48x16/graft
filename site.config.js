@@ -41,5 +41,13 @@ export default {
       sources: ['example'],
       ready: '#trend-table tbody tr',
     },
+    { file: 'jobs.html', kind: 'feature', title: 'Who Works', standfirst: 'Fifty years of work, worklessness and unfilled jobs, from the official surveys.', icon: 'hard-hat', sources: ['ons-labour', 'ons-vacancies'], ready: '#rate-table tbody tr' },
+    { file: 'pay.html', kind: 'feature', title: 'Pay Packet', standfirst: "What a week's work pays, by job and by region, before inflation.", icon: 'banknote', sources: ['ons-pay'], ready: '#region-bars .mag-bar' },
+    { file: 'born-abroad.html', kind: 'feature', title: 'Born Abroad', standfirst: 'How many people in work were born outside the UK, and how that mix has shifted.', icon: 'globe', sources: ['ons-birth'], ready: '#share-table tbody tr' },
+    { file: 'net-migration.html', kind: 'feature', title: 'In and Out', standfirst: 'How many people came to live in the UK, how many left, and why.', icon: 'arrow-left-right', sources: ['ons-ltim'], ready: '#net-table tbody tr' },
+    { file: 'visas.html', kind: 'feature', title: 'Visas Issued', standfirst: 'Who gets a UK visa, what for, and the care worker route that rose and fell.', icon: 'stamp', sources: ['ho-visas', 'ho-work-occupation'], ready: '#groups-table tbody tr' },
+    { file: 'asylum.html', kind: 'feature', title: 'Asylum Claims', standfirst: 'Claims, decisions and the queue in between, quarter by quarter.', icon: 'scale', sources: ['ho-asylum'], ready: '#claims-table tbody tr' },
+    { file: 'small-boats.html', kind: 'feature', title: 'Boats and Returns', standfirst: 'Small boat arrivals by month, who arrives, and who is returned from the UK.', icon: 'sailboat', sources: ['ho-irregular', 'ho-returns'], ready: '#month-heat tbody tr' },
+    { file: 'asylum-support.html', kind: 'tool', title: 'Support by Area', standfirst: 'Find how many people receive asylum support in a local authority.', icon: 'map-pin', sources: ['ho-asylum'], ready: '#area-table tbody tr' },
   ],
 };
