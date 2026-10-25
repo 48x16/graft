@@ -1,0 +1,37 @@
+{
+  "name": "graft",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Graft: Who works, who arrives, and what the official figures say.",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "vitest run",
+    "data": "node pipeline/run.js",
+    "data:cached": "node pipeline/run.js --cached",
+    "data:fixture": "node pipeline/run.js --fixture",
+    "check-page": "node scripts/check-page.mjs",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@fontsource-variable/inter": "^5.3.0",
+    "@fontsource-variable/inter-tight": "^5.3.0",
+    "@fontsource/ibm-plex-mono": "^5.3.0",
+    "d3": "^7.9.0",
+    "govuk-frontend": "^6.6.0",
+    "lucide": "^1.61.0"
+  },
+  "devDependencies": {
+    "@axe-core/playwright": "^4.14.0",
+    "@playwright/test": "^1.64.1",
+    "csv-parse": "^7.0.3",
+    "sass-embedded": "^1.106.1",
+    "vite": "^8.3.5",
+    "vitest": "^5.0.5"
+  }
+}

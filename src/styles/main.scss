@@ -1,0 +1,849 @@
+// House style: a magazine feel (after The Road Rat), the same look as Rev Counter.
+//
+// GOV.UK Frontend supplies the accessible behaviour: components, spacing, form patterns and
+// the yellow focus state keyboard users rely on. The look is ours. This is not a government
+// service, so the GOV.UK brand stays out: no crown, no GOV.UK header, no GDS Transport.
+//
+// - Pure white, near-black ink, generous whitespace, an asymmetric magazine grid.
+// - All sans: Inter Tight for the wordmark and headings, Inter for reading,
+//   IBM Plex Mono for figures in charts and tables and for small-caps credits.
+// - Pink is the one accent: link underlines, the current page, and the key figure.
+// - Contrast on white: ink 18.9:1, ink-2 8.9:1, ink-3 4.0:1, pink 4.9:1.
+
+$paper: #fff;
+$ink: #111;
+
+// Settings are configured once on `base`; everything imported after it shares them.
+@use "govuk-frontend/dist/govuk/base" as * with (
+  $govuk-font-family: ("Inter Variable", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif),
+  $govuk-functional-colours: (
+    brand: $ink,
+    text: $ink,
+    link: $ink,
+    link-visited: #4a4a4a,
+    link-hover: $ink,
+    link-active: $ink,
+    template-background: $paper,
+    body-background: $paper,
+    surface-background: #f2f2f2,
+    // Errors wear the house pink (GOV.UK's magenta, 4.9:1 on white) rather than red. The
+    // message text, "Error:" prefix and summary still carry the meaning, not colour alone.
+    error: #ca357c
+  )
+);
+
+// Only the components we use. Keeps the CSS small, and leaves out service navigation,
+// whose old-IE media query hack Vite's CSS minifier rejects.
+@use "govuk-frontend/dist/govuk/core";
+@use "govuk-frontend/dist/govuk/objects";
+@use "govuk-frontend/dist/govuk/components/skip-link";
+@use "govuk-frontend/dist/govuk/components/label";
+@use "govuk-frontend/dist/govuk/components/hint";
+@use "govuk-frontend/dist/govuk/components/input";
+@use "govuk-frontend/dist/govuk/components/button";
+@use "govuk-frontend/dist/govuk/components/error-message";
+@use "govuk-frontend/dist/govuk/components/select";
+@use "govuk-frontend/dist/govuk/components/fieldset";
+@use "govuk-frontend/dist/govuk/components/radios";
+@use "govuk-frontend/dist/govuk/components/details";
+@use "govuk-frontend/dist/govuk/components/table";
+@use "govuk-frontend/dist/govuk/components/error-summary";
+@use "govuk-frontend/dist/govuk/components/footer";
+@use "govuk-frontend/dist/govuk/utilities";
+@use "govuk-frontend/dist/govuk/overrides";
+
+:root {
+  --mag-ink: #{$ink};
+  --mag-ink-2: #4a4a4a;
+  --mag-ink-3: #7f7f7f;
+  --mag-rule: #d4d4d4;
+  --mag-wash: #f2f2f2;
+  --mag-paper: #{$paper};
+  --mag-pink: #{govuk-colour("magenta")};
+  --mag-focus: #{govuk-functional-colour(focus)};
+  --mag-display: "Inter Tight Variable", "Inter Variable", system-ui, sans-serif;
+  --mag-figure: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
+}
+
+body {
+  background: var(--mag-paper);
+}
+
+// Headings: Inter Tight, firm but not shouty. The wordmark is the only heavy, capitalised line.
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m,
+.govuk-heading-s {
+  font-family: var(--mag-display);
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.govuk-heading-xl {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+}
+
+// Pink is the accent on links: ink text, pink underline.
+.govuk-link:link,
+.govuk-link:visited {
+  text-decoration-color: var(--mag-pink);
+}
+
+// Small-caps credits, as in a magazine: "DATA HOME OFFICE · UPDATED 2026 Q2".
+.mag-credits {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mag-figure);
+  font-size: 13px;
+  line-height: 1.7;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--mag-ink-2);
+
+  b {
+    font-weight: 600;
+    color: var(--mag-ink);
+  }
+}
+
+// An uppercase pull quote for the narrow column.
+.mag-pullquote {
+  margin: 0;
+  font-family: var(--mag-display);
+  font-size: 24px;
+  font-weight: 450;
+  line-height: 1.35;
+  letter-spacing: 0.01em;
+  text-transform: uppercase;
+}
+
+// The asymmetric magazine grid: a narrow column for titles and notes, a wide one for content.
+.mag-split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr); // so wide tables scroll in their box, not the page
+  gap: govuk-spacing(4) govuk-spacing(7);
+
+  @include govuk-media-query($from: desktop) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+    align-items: start;
+  }
+}
+
+.mag-split__side > :last-child,
+.mag-split__main > :last-child {
+  margin-bottom: 0;
+}
+
+// Figures in tables line up in Plex Mono.
+.govuk-table__cell--numeric,
+.govuk-table__header--numeric {
+  font-family: var(--mag-figure);
+  font-size: 0.875em;
+}
+
+// Header: a heavy capitalised wordmark over one thin black rule.
+
+.mag-header__inner {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: govuk-spacing(2) govuk-spacing(4);
+  padding: govuk-spacing(4) 0 govuk-spacing(3);
+  border-bottom: 1px solid var(--mag-ink);
+}
+
+.mag-offline {
+  display: inline-flex;
+  align-items: center;
+  gap: govuk-spacing(2);
+  margin: 0;
+  padding: 2px govuk-spacing(2);
+  @include govuk-font($size: 16, $weight: bold);
+  color: var(--mag-paper);
+  background: var(--mag-ink);
+
+  &[hidden] {
+    display: none;
+  }
+
+  svg {
+    width: 18px;
+    height: 18px;
+  }
+}
+
+// Sticks to the bottom of the screen while the page scrolls, and rests at the end of the content.
+.mag-back-to-top {
+  position: sticky;
+  bottom: govuk-spacing(3);
+  display: flex;
+  justify-content: flex-end;
+  margin-top: govuk-spacing(6);
+  pointer-events: none;
+
+  &[hidden] {
+    display: none;
+  }
+}
+
+// A black circle with a white arrow; the link's name is visually hidden text.
+.mag-back-to-top__link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  color: var(--mag-paper);
+  background: var(--mag-ink);
+  border-radius: 50%;
+  pointer-events: auto;
+
+  &:link,
+  &:visited,
+  &:hover {
+    color: var(--mag-paper);
+  }
+
+  &:hover {
+    box-shadow: 0 0 0 3px var(--mag-paper), 0 0 0 5px var(--mag-pink);
+  }
+
+  &:focus {
+    outline: 3px solid transparent;
+    color: var(--mag-ink);
+    background: var(--mag-focus);
+    box-shadow: 0 0 0 3px var(--mag-ink);
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+    stroke-width: 2.5;
+  }
+}
+
+.mag-header__wordmark {
+  font-family: var(--mag-display);
+  font-size: 28px;
+  font-weight: 900;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  word-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mag-ink);
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+    text-decoration-color: var(--mag-pink);
+    text-decoration-thickness: 3px;
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+
+  @include govuk-media-query($until: tablet) {
+    font-size: 22px;
+  }
+}
+
+
+// Chart. Each series keeps the same style wherever it appears (.mag-line--s1 to s6).
+// Greys are told apart by dash pattern and direct labels, never by shade alone.
+
+// GOV.UK Frontend sets the font per class, not on body, so SVG text needs it set here.
+.mag-chart {
+  @include govuk-font($size: 16);
+}
+
+.mag-chart__frame {
+  position: relative;
+}
+
+.mag-chart__svg {
+  display: block;
+  width: 100%;
+  overflow: visible;
+
+  &:focus {
+    outline: 3px solid transparent;
+  }
+
+  &:focus-visible {
+    outline: 3px solid var(--mag-focus);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 5px var(--mag-ink);
+  }
+}
+
+.mag-chart__grid line {
+  stroke: var(--mag-wash);
+  stroke-width: 1;
+}
+
+.mag-chart__axis {
+  @include govuk-font($size: 16, $tabular: true);
+
+  text {
+    fill: var(--mag-ink-2);
+    font-family: var(--mag-figure);
+    font-size: 13px;
+  }
+
+  .domain,
+  .tick line {
+    stroke: var(--mag-rule);
+  }
+}
+
+.mag-chart__labels text {
+  fill: var(--mag-ink);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.mag-chart__crosshair {
+  stroke: var(--mag-ink-3);
+  stroke-width: 1;
+}
+
+.mag-chart__hit {
+  fill: transparent;
+  pointer-events: all;
+}
+
+.mag-line {
+  fill: none;
+  stroke-width: 2;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+}
+
+// Six series styles, told apart by dash and weight as well as shade. s1 is the lead series;
+// pink (s6) is kept for the one series the story is about. Lines carry direct labels.
+.mag-line--s1 { stroke: var(--mag-ink); }
+.mag-line--s2 { stroke: var(--mag-ink); stroke-dasharray: 7 4; stroke-linecap: butt; }
+.mag-line--s3 { stroke: var(--mag-ink-2); }
+.mag-line--s4 { stroke: var(--mag-ink-2); stroke-dasharray: 0.1 5; stroke-width: 3; }
+.mag-line--s5 { stroke: var(--mag-ink-3); stroke-dasharray: 12 3 2 3; stroke-linecap: butt; }
+.mag-line--s6 { stroke: var(--mag-pink); stroke-width: 3; }
+
+.mag-dot--s1,
+.mag-dot--s2 { fill: var(--mag-ink); }
+.mag-dot--s3,
+.mag-dot--s4 { fill: var(--mag-ink-2); }
+.mag-dot--s5 { fill: var(--mag-ink-3); }
+.mag-dot--s6 { fill: var(--mag-pink); }
+.mag-dot {
+  stroke: var(--mag-paper);
+  stroke-width: 2;
+}
+
+.mag-key {
+  width: 24px;
+  height: 8px;
+  flex: none;
+  overflow: visible;
+}
+
+.mag-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: govuk-spacing(1) govuk-spacing(4);
+  margin: 0 0 govuk-spacing(3);
+  padding: 0;
+  list-style: none;
+  @include govuk-font($size: 16);
+}
+
+.mag-legend__item {
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(2);
+}
+
+.mag-tooltip {
+  position: absolute;
+  z-index: 1;
+  min-width: 180px;
+  padding: govuk-spacing(2) govuk-spacing(3);
+  background: var(--mag-paper);
+  border: 1px solid var(--mag-ink);
+  box-shadow: 0 2px 8px rgb(11 12 12 / 15%);
+  pointer-events: none;
+  @include govuk-font($size: 16);
+}
+
+.mag-tooltip__title {
+  margin: 0 0 govuk-spacing(1);
+  font-weight: 700;
+}
+
+.mag-tooltip__row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: govuk-spacing(3);
+}
+
+.mag-tooltip__value {
+  font-family: var(--mag-figure);
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.mag-tooltip__label {
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(2);
+  color: var(--mag-ink-2);
+}
+
+.mag-tooltip__row--total {
+  margin-top: govuk-spacing(1);
+  padding-top: govuk-spacing(1);
+  border-top: 1px solid var(--mag-rule);
+}
+
+.mag-table-details {
+  margin-top: govuk-spacing(4);
+
+  .govuk-table {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+// Header navigation: ink links on paper; the current page is underlined in pink.
+
+// Wraps on narrow screens, so the links never push the page wider than the phone.
+.mag-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: govuk-spacing(1) govuk-spacing(5);
+  margin-left: auto;
+
+  @include govuk-media-query($until: tablet) {
+    gap: govuk-spacing(1) govuk-spacing(4);
+    margin-left: 0;
+  }
+}
+
+.mag-nav__link {
+  @include govuk-font($size: 19, $weight: bold);
+  color: var(--mag-ink);
+  text-decoration: none;
+  padding: 2px 0;
+  border-bottom: 4px solid transparent;
+
+  &:hover {
+    border-bottom-color: var(--mag-ink);
+  }
+
+  &[aria-current="page"] {
+    border-bottom-color: var(--mag-pink);
+  }
+
+  &:focus {
+    @include govuk-focused-text;
+  }
+}
+
+// Sections
+
+// Each section opens with a hairline, then the narrow column names it and the wide one shows it.
+.mag-section {
+  margin-top: govuk-spacing(9);
+  padding-top: govuk-spacing(4);
+  border-top: 1px solid var(--mag-ink);
+}
+
+.mag-hero {
+  margin-bottom: govuk-spacing(7);
+
+  .govuk-body-l {
+    @include govuk-font($size: 24);
+  }
+
+  .mag-credits {
+    margin-top: govuk-spacing(5);
+  }
+}
+
+.mag-tiles {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(14em, 1fr));
+  gap: govuk-spacing(4);
+  margin: govuk-spacing(6) 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mag-tile {
+  padding: govuk-spacing(3) 0 govuk-spacing(4);
+  border-top: 1px solid var(--mag-ink);
+
+  &:first-child {
+    border-top: 4px solid var(--mag-pink);
+    padding-top: calc(#{govuk-spacing(3)} - 3px);
+  }
+}
+
+.mag-tile__value {
+  display: block;
+  @include govuk-font($size: 36, $weight: bold);
+  font-family: var(--mag-display);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.mag-tile__label {
+  display: block;
+  margin-top: govuk-spacing(1);
+  @include govuk-font($size: 16);
+  color: var(--mag-ink-2);
+}
+
+
+// Footer: white, opened by the same thin black rule as the header.
+
+.mag-footer {
+  background: var(--mag-paper);
+  border-top: 1px solid var(--mag-ink);
+}
+
+// Five greys for heat cells, light (low) to dark (high).
+$mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
+// Wide tables scroll sideways inside their box rather than widening the page.
+.mag-table-scroll {
+  overflow-x: auto;
+}
+
+.mag-table-scroll:focus-visible {
+  outline: 3px solid var(--mag-focus);
+  outline-offset: 0;
+  box-shadow: inset 0 0 0 2px var(--mag-ink);
+}
+
+// Story pages
+// Feature pages open like a magazine story: a kicker, a big title, a standfirst, then the
+// lead infographic. Every graphic below is HTML or SVG built from the data.
+
+.mag-kicker {
+  margin: 0 0 govuk-spacing(2);
+  font-family: var(--mag-figure);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--mag-pink);
+}
+
+.mag-standfirst {
+  margin: 0 0 govuk-spacing(5);
+  @include govuk-font($size: 24);
+  font-family: var(--mag-display);
+  line-height: 1.35;
+}
+
+// Card lists (home, features, tools): one card per page.
+.mag-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11.5em, 1fr));
+  gap: govuk-spacing(6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mag-card {
+  position: relative;
+  padding-top: govuk-spacing(3);
+  border-top: 4px solid var(--mag-ink);
+
+  &:hover {
+    border-top-color: var(--mag-pink);
+  }
+}
+
+.mag-card__icon svg {
+  width: 40px;
+  height: 40px;
+  stroke-width: 1.5;
+}
+
+.mag-card__title {
+  margin: govuk-spacing(2) 0;
+}
+
+// The whole card is the link's target, for a bigger hit area.
+.mag-card__link::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+}
+
+.mag-columns {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(12em, 1fr));
+  gap: govuk-spacing(5);
+}
+
+.mag-column-note {
+  grid-column: 1 / -1;
+  margin: 0;
+  color: var(--mag-ink-2);
+}
+
+.mag-heat {
+  margin-bottom: govuk-spacing(5);
+  font-family: var(--mag-figure);
+  font-size: 13px;
+
+  th,
+  td {
+    padding: 6px 4px;
+    text-align: center;
+    border-bottom: 0;
+  }
+}
+
+.mag-heat__cell {
+  min-width: 2.6em;
+  border: 2px solid var(--mag-paper);
+}
+
+@each $i, $colour in $mag-map-steps {
+  .mag-heat__cell[data-step="#{$i}"] {
+    background: $colour;
+    color: #111;
+
+    @if $i >= 3 {
+      color: #fff;
+    }
+  }
+}
+
+// The phone menu: a Menu button that shows and hides the links. Only once the script has run
+// (.mag-js), so without JavaScript the links still show, wrapped.
+.mag-menu-button {
+  display: none;
+}
+
+@include govuk-media-query($until: tablet) {
+  .mag-js {
+    .mag-menu-button {
+      display: inline-flex;
+      align-items: center;
+      gap: govuk-spacing(1);
+      margin-left: auto;
+      padding: govuk-spacing(1) govuk-spacing(2);
+      @include govuk-font($size: 19, $weight: bold);
+      color: var(--mag-ink);
+      background: none;
+      border: 2px solid var(--mag-ink);
+      cursor: pointer;
+
+      svg {
+        width: 22px;
+        height: 22px;
+      }
+
+      &[aria-expanded="true"] {
+        color: var(--mag-paper);
+        background: var(--mag-pink);
+        border-color: var(--mag-pink);
+      }
+
+      // Keyboard focus keeps GOV.UK's yellow (users need to see where they are); a tap or
+      // click doesn't flash it.
+      &:focus {
+        outline: none;
+      }
+
+      &:focus-visible {
+        @include govuk-focused-text;
+      }
+    }
+
+    .mag-nav {
+      display: none;
+      flex-basis: 100%;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .mag-nav--open {
+      display: flex;
+    }
+
+    .mag-nav__link {
+      padding: govuk-spacing(2) 0;
+      border-bottom: 1px solid var(--mag-rule);
+
+      &[aria-current="page"] {
+        border-bottom: 1px solid var(--mag-rule);
+        box-shadow: inset 4px 0 0 var(--mag-pink);
+        padding-left: govuk-spacing(2);
+      }
+    }
+  }
+}
+
+// The phone's bottom bar: black, so it reads as the app's own controls, with the current page
+// in pink. Shown on small screens once the script has run.
+.mag-tabbar {
+  display: none;
+}
+
+@include govuk-media-query($until: tablet) {
+  .mag-js {
+    .govuk-template__body {
+      padding-bottom: calc(64px + env(safe-area-inset-bottom));
+    }
+
+    .mag-back-to-top {
+      bottom: calc(76px + env(safe-area-inset-bottom));
+    }
+
+    .mag-tabbar {
+      position: fixed;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 10;
+      display: block;
+      padding-bottom: env(safe-area-inset-bottom);
+      background: var(--mag-ink);
+      box-shadow: 0 -1px 0 var(--mag-ink-2);
+    }
+  }
+}
+
+.mag-tabbar__list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    flex: 1;
+  }
+}
+
+.mag-tabbar__link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-height: 64px;
+  justify-content: center;
+  font-family: var(--mag-display);
+  font-size: 12px;
+  font-weight: 600;
+  color: #cfcfcf;
+  text-decoration: none;
+  border-top: 3px solid transparent;
+
+  svg {
+    width: 22px;
+    height: 22px;
+  }
+
+  &:link,
+  &:visited {
+    color: #cfcfcf;
+  }
+
+  &[aria-current="page"] {
+    color: var(--mag-paper);
+    border-top-color: var(--mag-pink);
+
+    svg {
+      color: var(--mag-pink);
+    }
+  }
+
+  &:focus {
+    outline: none;
+  }
+
+  &:focus-visible {
+    color: var(--mag-ink);
+    background: var(--mag-focus);
+    outline: none;
+
+    svg {
+      color: var(--mag-ink);
+    }
+  }
+}
+
+// Bar rows (bars and markedBars in charts.js): name, a track with its fill, the figure.
+
+.mag-bars {
+  max-width: 34em;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.mag-bar {
+  display: grid;
+  grid-template-columns: minmax(6em, 9.5em) 1fr 4.5em;
+  align-items: center;
+  gap: govuk-spacing(2);
+  margin-bottom: 2px;
+  @include govuk-font($size: 16);
+}
+
+.mag-bar__track {
+  height: 10px;
+  background: var(--mag-wash);
+}
+
+.mag-bar__fill {
+  display: block;
+  min-width: 2px;
+  height: 100%;
+  background: var(--mag-ink);
+  border-radius: 0 4px 4px 0;
+}
+
+.mag-bar__value {
+  font-family: var(--mag-figure);
+  font-weight: 600;
+  text-align: right;
+}
+
+.mag-bar__track {
+  position: relative;
+}
+
+.mag-bar__average {
+  position: absolute;
+  top: -3px;
+  width: 3px;
+  height: 16px;
+  background: var(--mag-pink);
+}
+
+
+// Heat tables: a real table, its cells shaded in five greys (.mag-heat__cell, above).
+.mag-heat-table .govuk-table__cell,
+.mag-heat-table .govuk-table__header {
+  padding-right: govuk-spacing(2);
+  padding-left: govuk-spacing(2);
+}
+
+
+// Says so when a list has nothing in it (the fixture data, or a quiet period).
+.mag-empty {
+  color: var(--mag-ink-2);
+  font-style: italic;
+}

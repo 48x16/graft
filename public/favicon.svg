@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Three bars rising on black, the last in the house pink. Inside the maskable safe zone. -->
+  <rect width="512" height="512" fill="#0b0c0c"/>
+  <rect x="136" y="276" width="56" height="100" fill="#fff"/>
+  <rect x="228" y="206" width="56" height="170" fill="#fff"/>
+  <rect x="320" y="136" width="56" height="240" fill="#ca357c"/>
+</svg>

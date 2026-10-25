@@ -1,0 +1,12 @@
+{
+  "name": "Graft",
+  "short_name": "Graft",
+  "description": "Who works, who arrives, and what the official figures say.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "lang": "en-GB",
+  "icons": [{ "src": "favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }]
+}

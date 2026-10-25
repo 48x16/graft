@@ -1,0 +1,11 @@
+node_modules/
+dist/
+.env
+
+# Downloads (untrusted, often large) and the data built from them: rebuilt by `npm run data`.
+.cache/
+public/data/
+
+# Playwright
+test-results/
+playwright-report/
