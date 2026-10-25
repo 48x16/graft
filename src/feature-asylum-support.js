@@ -6,9 +6,9 @@
 import topology from '../data/geo/councils.json';
 import { createBubbleMap, sizeKey } from './bubble-map.js';
 import { $, startFeature } from './feature-page.js';
-import { emptyNote, formatCount, formatPercent, renderTable, tiles } from './charts.js';
+import { bars, emptyNote, formatCount, formatPercent, markedBars, renderTable, tiles } from './charts.js';
 import { createChart } from './line-chart.js';
-import { loadItem } from './data.js';
+import { loadFeature, loadItem } from './data.js';
 
 const MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 /** "30 June 2023" → a UTC Date. */
@@ -20,6 +20,8 @@ function parseDate(text) {
 /** A Count as words: "3,940", or its band ("fewer than 10") when the count is suppressed. */
 const countText = (c) => (c.n === null ? c.band ?? 'not published' : formatCount(c.n));
 const capital = (s) => s[0].toUpperCase() + s.slice(1);
+/** "The North West", "The East Midlands", but "London", "Scotland". */
+const theRegion = (name) => (/^(North|South|East|West)\b/.test(name) ? `The ${name}` : name);
 /** Big enough to say something about (not banded, not zero). */
 const sizeable = (c) => c.n !== null && c.n >= 10;
 /** A share of the UK, without printing "0.0%" for the smallest areas. */
@@ -190,7 +192,7 @@ startFeature('asylum-support', (index) => {
     // The region: exact totals.
     const hasRegion = a.region && a.region !== 'Unknown' && a.regionTotal !== null && a.regionTotal !== undefined;
     $('region-summary').textContent = hasRegion
-      ? `${a.region} had ${formatCount(a.regionTotal)} people on asylum support on ${a.date}: ${formatPercent(a.regionTotal / a.ukTotal)} of the UK's ${formatCount(a.ukTotal)}.`
+      ? `${theRegion(a.region)} had ${formatCount(a.regionTotal)} people on asylum support on ${a.date}: ${formatPercent(a.regionTotal / a.ukTotal)} of the UK's ${formatCount(a.ukTotal)}.`
       : '';
     const regionTiles = [];
     if (hasRegion) regionTiles.push({ value: formatCount(a.regionTotal), label: `people on asylum support in ${a.region}` });
@@ -199,3 +201,73 @@ startFeature('asylum-support', (index) => {
   }
 });
 
+
+// Cheap housing, more support: people on asylum support per 10,000 residents, by fifths of
+// local authorities ranked by household income and by house price, and the highest and
+// lowest rates. Its own data file, so the rest of the tool works without it.
+const FIFTHS = ['Lowest', 'Second', 'Middle', 'Fourth', 'Highest'];
+const pounds = (v) => `£${formatCount(Math.round(v))}`;
+const rate = (v) => (v === null || v === undefined ? 'no rate' : v.toFixed(1));
+
+loadFeature('asylum-income')
+  .then((d) => {
+    const q = d.quintiles ?? [];
+    const out = d.quintilesOutsideLondon ?? [];
+    const hp = d.quintilesByHousePrice ?? [];
+    if (q.length < 2) {
+      $('income-summary').replaceWith(emptyNote());
+      return;
+    }
+    const low = q[0];
+    const high = q.at(-1);
+    const more = low.ratePer10k > high.ratePer10k;
+    const sentences = [
+      `${more ? 'Lower' : 'Higher'}-income areas house more people on asylum support. In the fifth of local authorities with the lowest household income, ${rate(low.ratePer10k)} people in every 10,000 residents were on asylum support on ${d.updated.support}; in the highest-income fifth, ${rate(high.ratePer10k)}.`,
+    ];
+    if (out.length > 1) sentences.push(`Outside London the gap is ${Math.abs(out[0].ratePer10k - out.at(-1).ratePer10k) > Math.abs(low.ratePer10k - high.ratePer10k) ? 'wider' : 'narrower'}: ${rate(out[0].ratePer10k)} against ${rate(out.at(-1).ratePer10k)}.`);
+    if (hp.length > 1) sentences.push(`By house price it is ${rate(hp[0].ratePer10k)} in the cheapest fifth against ${rate(hp.at(-1).ratePer10k)} in the dearest.`);
+    if (d.noneOrFew?.count) sentences.push(`${capital(formatCount(d.noneOrFew.inTopQuintile))} of the ${formatCount(high.areas)} highest-income areas had fewer than 10 people on support or none, against ${formatCount(d.noneOrFew.inBottomQuintile)} of the ${formatCount(low.areas)} lowest-income areas.`);
+    $('income-summary').textContent = sentences.join(' ');
+    $('income-method').textContent += ` Support on ${d.updated.support}; population ${d.updated.population}; income ${d.updated.income}; house prices ${d.updated.housePrice}. Household income figures are official statistics in development.`;
+
+    const scale = Math.max(...q.map((r) => r.ratePer10k), ...out.map((r) => r.ratePer10k), ...hp.map((r) => r.ratePer10k));
+    $('income-chart').append(
+      markedBars(
+        q.map((r, i) => ({ label: `${FIFTHS[i]} income`, value: r.ratePer10k, text: rate(r.ratePer10k), mark: out[i]?.ratePer10k ?? null, markText: rate(out[i]?.ratePer10k) })),
+        scale,
+        'outside London',
+      ),
+      el('p', 'govuk-body-s', 'The red marker is the same fifth with London left out.'),
+    );
+    $('price-chart').append(bars(hp.map((r, i) => ({ label: `${FIFTHS[i]} prices`, value: r.ratePer10k, text: rate(r.ratePer10k) })), scale));
+    $('income-table').append(
+      renderTable({
+        caption: 'People on asylum support per 10,000 residents, by fifth of local authorities',
+        head: ['Fifth', 'Income per head', 'Rate', 'Outside London', 'House price', 'Rate by price', 'Areas with fewer than 10 or none'],
+        rows: q.map((r, i) => [
+          FIFTHS[i],
+          `${pounds(r.incomeFrom)} to ${pounds(r.incomeTo)}`,
+          rate(r.ratePer10k),
+          rate(out[i]?.ratePer10k),
+          hp[i] ? `${pounds(hp[i].priceFrom)} to ${pounds(hp[i].priceTo)}` : '–',
+          rate(hp[i]?.ratePer10k),
+          r.fewerThan10OrNone,
+        ]),
+      }),
+    );
+    const list = (rows) =>
+      bars(
+        rows.map((r) => ({ label: r.name, value: r.ratePer10k, text: rate(r.ratePer10k) })),
+        Math.max(1, ...(d.highest ?? []).map((r) => r.ratePer10k)),
+      );
+    $('income-highest').append(list(d.highest ?? []));
+    $('income-lowest').append(list(d.lowest ?? []));
+  })
+  .catch((err) => $('income-summary').replaceWith(emptyNote('p', `The income comparison could not be loaded: ${err.message}`)));
+
+function el(tag, className, text) {
+  const node = document.createElement(tag);
+  node.className = className;
+  node.textContent = text;
+  return node;
+}

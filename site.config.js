@@ -24,6 +24,11 @@ export default {
     'ons-vacancies': { publisher: 'Office for National Statistics', title: 'Vacancies by industry (VACS02)', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/datasets/vacanciesbyindustryvacs02', licence: 'ogl' },
     'ons-pay': { publisher: 'Office for National Statistics', title: 'Annual Survey of Hours and Earnings (Table 3) and PAYE Real Time Information', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/regionbyoccupation2digitsocashetable3', licence: 'ogl' },
     'ons-birth': { publisher: 'Office for National Statistics', title: 'Employment by country of birth and nationality (EMP06)', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentbycountryofbirthandnationalityemp06', licence: 'ogl' },
+    'ons-population': { publisher: 'Office for National Statistics', title: 'Population estimates for the UK, mid-year', url: 'https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland', licence: 'ogl' },
+    'ons-gdhi': { publisher: 'Office for National Statistics', title: 'Gross disposable household income by local authority', url: 'https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/datasets/regionalgrossdisposablehouseholdincomelocalauthorities', licence: 'ogl' },
+    'hac-580': { publisher: 'House of Commons Home Affairs Committee', title: 'The Home Office’s management of asylum accommodation (HC 580, October 2025)', url: 'https://publications.parliament.uk/pa/cm5901/cmselect/cmhaff/580/report.html', licence: 'ogl' },
+    'lr-hpi': { publisher: 'HM Land Registry', title: 'UK House Price Index', url: 'https://www.gov.uk/government/collections/uk-house-price-index-reports', licence: 'ogl' },
+    'ons-geography': { publisher: 'Office for National Statistics', title: 'Local authority district boundaries (Open Geography Portal; contains OS data © Crown copyright and database right)', url: 'https://geoportal.statistics.gov.uk/', licence: 'ogl' },
   },
   pages: [
     { file: 'jobs.html', kind: 'feature', title: 'Who Works', standfirst: 'Fifty years of work, worklessness and unfilled jobs, from the official surveys.', icon: 'hard-hat', sources: ['ons-labour', 'ons-vacancies'], ready: '#rate-table tbody tr' },
@@ -33,6 +38,6 @@ export default {
     { file: 'visas.html', kind: 'feature', title: 'Visas Issued', standfirst: 'Who gets a UK visa, what for, and the care worker route that rose and fell.', icon: 'stamp', sources: ['ho-visas', 'ho-work-occupation'], ready: '#groups-table tbody tr' },
     { file: 'asylum.html', kind: 'feature', title: 'Asylum Claims', standfirst: 'Claims, decisions and the queue in between, quarter by quarter.', icon: 'scale', sources: ['ho-asylum'], ready: '#claims-table tbody tr' },
     { file: 'small-boats.html', kind: 'feature', title: 'Boats and Returns', standfirst: 'Small boat arrivals by month, who arrives, and who is returned from the UK.', icon: 'sailboat', sources: ['ho-irregular', 'ho-returns'], ready: '#month-heat tbody tr' },
-    { file: 'asylum-support.html', kind: 'tool', title: 'Support by Area', standfirst: 'Find how many people receive asylum support in a local authority.', icon: 'map-pin', sources: ['ho-asylum'], ready: '#area-table tbody tr' },
+    { file: 'asylum-support.html', kind: 'tool', title: 'Support by Area', standfirst: 'Find how many people receive asylum support in a local authority.', icon: 'map-pin', sources: ['ho-asylum', 'ons-population', 'ons-gdhi', 'lr-hpi', 'hac-580', 'ons-geography'], ready: '#area-table tbody tr' },
   ],
 };
