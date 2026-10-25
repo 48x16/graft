@@ -29,7 +29,7 @@ function serviceWorker() {
     apply: 'build',
     generateBundle(_, bundle) {
       // Fonts ship a file per script; precache the Latin ones, cache any other when first used.
-      const latinFont = /(inter|inter-tight)-latin-wght-normal|ibm-plex-mono-latin-(400|600)-normal/;
+      const latinFont = /(inter|oswald)-latin-wght-normal|ibm-plex-mono-latin-(400|600)-normal/;
       const files = Object.keys(bundle).filter((f) => !f.endsWith('.map') && (!f.endsWith('.woff2') || latinFont.test(f)));
       const precache = ['./', ...new Set([...PAGES, ...files, ...PUBLIC_SHELL])].map((f) => (f === './' ? f : `./${f}`));
       const version = createHash('sha256').update(precache.join('\n')).digest('hex').slice(0, 12);

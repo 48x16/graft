@@ -1,16 +1,17 @@
-// House style: a magazine feel (after The Road Rat), the same look as Rev Counter.
+// House style: gritty newsprint. The same grid and rules as Rev Counter, roughed up: grainy
+// off-white paper, heavy condensed capitals, thick black rules, and a stamp red.
 //
 // GOV.UK Frontend supplies the accessible behaviour: components, spacing, form patterns and
 // the yellow focus state keyboard users rely on. The look is ours. This is not a government
 // service, so the GOV.UK brand stays out: no crown, no GOV.UK header, no GDS Transport.
 //
-// - Pure white, near-black ink, generous whitespace, an asymmetric magazine grid.
-// - All sans: Inter Tight for the wordmark and headings, Inter for reading,
-//   IBM Plex Mono for figures in charts and tables and for small-caps credits.
-// - Pink is the one accent: link underlines, the current page, and the key figure.
-// - Contrast on white: ink 18.9:1, ink-2 8.9:1, ink-3 4.0:1, pink 4.9:1.
+// - Newsprint paper with a faint grain, near-black ink, thick rules, an asymmetric grid.
+// - Oswald (condensed, heavy, capitals) for the wordmark and headings, Inter for reading,
+//   IBM Plex Mono for figures in charts and tables and for the typewritten credits.
+// - Stamp red is the one accent: kicker labels, link underlines, the current page, the key figure.
+// - Light only. Contrast on the paper: ink 16.9:1, ink-2 10:1, ink-3 5.4:1, red 5.8:1.
 
-$paper: #fff;
+$paper: #f3f0e8; // newsprint
 $ink: #111;
 
 // Settings are configured once on `base`; everything imported after it shares them.
@@ -20,15 +21,15 @@ $ink: #111;
     brand: $ink,
     text: $ink,
     link: $ink,
-    link-visited: #4a4a4a,
+    link-visited: #3d3a35,
     link-hover: $ink,
     link-active: $ink,
     template-background: $paper,
     body-background: $paper,
-    surface-background: #f2f2f2,
-    // Errors wear the house pink (GOV.UK's magenta, 4.9:1 on white) rather than red. The
+    surface-background: #e8e4da,
+    // Errors wear the house red (stamp red, 5.8:1 on the paper). The
     // message text, "Error:" prefix and summary still carry the meaning, not colour alone.
-    error: #ca357c
+    error: #b3261e
   )
 );
 
@@ -54,40 +55,53 @@ $ink: #111;
 
 :root {
   --mag-ink: #{$ink};
-  --mag-ink-2: #4a4a4a;
-  --mag-ink-3: #7f7f7f;
-  --mag-rule: #d4d4d4;
-  --mag-wash: #f2f2f2;
+  --mag-ink-2: #3d3a35;
+  --mag-ink-3: #66625a;
+  --mag-rule: #c9c4b8;
+  --mag-wash: #e3dfd4;
   --mag-paper: #{$paper};
-  --mag-pink: #{govuk-colour("magenta")};
+  --mag-accent: #b3261e;
   --mag-focus: #{govuk-functional-colour(focus)};
-  --mag-display: "Inter Tight Variable", "Inter Variable", system-ui, sans-serif;
+  --mag-display: "Oswald Variable", "Arial Narrow", "Inter Variable", system-ui, sans-serif;
   --mag-figure: "IBM Plex Mono", ui-monospace, "Cascadia Mono", Consolas, monospace;
 }
 
+// A faint fractal grain over the paper, like cheap newsprint. Decorative only.
 body {
-  background: var(--mag-paper);
+  background-color: var(--mag-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .06 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
 
-// Headings: Inter Tight, firm but not shouty. The wordmark is the only heavy, capitalised line.
+// Headings: Oswald, heavy and condensed. Big ones in capitals, like a front page.
 .govuk-heading-xl,
 .govuk-heading-l,
 .govuk-heading-m,
 .govuk-heading-s {
   font-family: var(--mag-display);
-  font-weight: 650;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: 0;
+}
+
+.govuk-heading-xl,
+.govuk-heading-l,
+.govuk-heading-m {
+  text-transform: uppercase;
 }
 
 .govuk-heading-xl {
   font-weight: 700;
-  letter-spacing: -0.035em;
+  line-height: 0.95;
+  letter-spacing: -0.01em;
 }
 
-// Pink is the accent on links: ink text, pink underline.
+.govuk-heading-l {
+  font-weight: 700;
+}
+
+// Stamp red is the accent on links: ink text, red underline.
 .govuk-link:link,
 .govuk-link:visited {
-  text-decoration-color: var(--mag-pink);
+  text-decoration-color: var(--mag-accent);
 }
 
 // Small-caps credits, as in a magazine: "DATA HOME OFFICE · UPDATED 2026 Q2".
@@ -208,7 +222,7 @@ body {
   }
 
   &:hover {
-    box-shadow: 0 0 0 3px var(--mag-paper), 0 0 0 5px var(--mag-pink);
+    box-shadow: 0 0 0 3px var(--mag-paper), 0 0 0 5px var(--mag-accent);
   }
 
   &:focus {
@@ -238,7 +252,7 @@ body {
 
   &:hover {
     text-decoration: underline;
-    text-decoration-color: var(--mag-pink);
+    text-decoration-color: var(--mag-accent);
     text-decoration-thickness: 3px;
   }
 
@@ -324,20 +338,20 @@ body {
 }
 
 // Six series styles, told apart by dash and weight as well as shade. s1 is the lead series;
-// pink (s6) is kept for the one series the story is about. Lines carry direct labels.
+// red (s6) is kept for the one series the story is about. Lines carry direct labels.
 .mag-line--s1 { stroke: var(--mag-ink); }
 .mag-line--s2 { stroke: var(--mag-ink); stroke-dasharray: 7 4; stroke-linecap: butt; }
 .mag-line--s3 { stroke: var(--mag-ink-2); }
 .mag-line--s4 { stroke: var(--mag-ink-2); stroke-dasharray: 0.1 5; stroke-width: 3; }
 .mag-line--s5 { stroke: var(--mag-ink-3); stroke-dasharray: 12 3 2 3; stroke-linecap: butt; }
-.mag-line--s6 { stroke: var(--mag-pink); stroke-width: 3; }
+.mag-line--s6 { stroke: var(--mag-accent); stroke-width: 3; }
 
 .mag-dot--s1,
 .mag-dot--s2 { fill: var(--mag-ink); }
 .mag-dot--s3,
 .mag-dot--s4 { fill: var(--mag-ink-2); }
 .mag-dot--s5 { fill: var(--mag-ink-3); }
-.mag-dot--s6 { fill: var(--mag-pink); }
+.mag-dot--s6 { fill: var(--mag-accent); }
 .mag-dot {
   stroke: var(--mag-paper);
   stroke-width: 2;
@@ -418,7 +432,7 @@ body {
   }
 }
 
-// Header navigation: ink links on paper; the current page is underlined in pink.
+// Header navigation: ink links on paper; the current page is underlined in red.
 
 // Wraps on narrow screens, so the links never push the page wider than the phone.
 .mag-nav {
@@ -445,7 +459,7 @@ body {
   }
 
   &[aria-current="page"] {
-    border-bottom-color: var(--mag-pink);
+    border-bottom-color: var(--mag-accent);
   }
 
   &:focus {
@@ -488,7 +502,7 @@ body {
   border-top: 1px solid var(--mag-ink);
 
   &:first-child {
-    border-top: 4px solid var(--mag-pink);
+    border-top: 4px solid var(--mag-accent);
     padding-top: calc(#{govuk-spacing(3)} - 3px);
   }
 }
@@ -541,7 +555,7 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
   font-weight: 600;
   letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--mag-pink);
+  color: var(--mag-accent);
 }
 
 .mag-standfirst {
@@ -567,7 +581,7 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
   border-top: 4px solid var(--mag-ink);
 
   &:hover {
-    border-top-color: var(--mag-pink);
+    border-top-color: var(--mag-accent);
   }
 }
 
@@ -656,8 +670,8 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
 
       &[aria-expanded="true"] {
         color: var(--mag-paper);
-        background: var(--mag-pink);
-        border-color: var(--mag-pink);
+        background: var(--mag-accent);
+        border-color: var(--mag-accent);
       }
 
       // Keyboard focus keeps GOV.UK's yellow (users need to see where they are); a tap or
@@ -688,7 +702,7 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
 
       &[aria-current="page"] {
         border-bottom: 1px solid var(--mag-rule);
-        box-shadow: inset 4px 0 0 var(--mag-pink);
+        box-shadow: inset 4px 0 0 var(--mag-accent);
         padding-left: govuk-spacing(2);
       }
     }
@@ -696,7 +710,7 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
 }
 
 // The phone's bottom bar: black, so it reads as the app's own controls, with the current page
-// in pink. Shown on small screens once the script has run.
+// in red. Shown on small screens once the script has run.
 .mag-tabbar {
   display: none;
 }
@@ -762,10 +776,10 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
 
   &[aria-current="page"] {
     color: var(--mag-paper);
-    border-top-color: var(--mag-pink);
+    border-top-color: var(--mag-accent);
 
     svg {
-      color: var(--mag-pink);
+      color: var(--mag-accent);
     }
   }
 
@@ -830,7 +844,7 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
   top: -3px;
   width: 3px;
   height: 16px;
-  background: var(--mag-pink);
+  background: var(--mag-accent);
 }
 
 
@@ -846,4 +860,84 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
 .mag-empty {
   color: var(--mag-ink-2);
   font-style: italic;
+}
+
+// Graft's grit: thick rules, a stamped wordmark and kicker, figures in heavy condensed type.
+// Grouped here so the shared blocks above stay as the kit has them.
+
+.mag-header__inner {
+  border-bottom: 6px solid var(--mag-ink);
+}
+
+// The wordmark is a black block, white capitals, like a masthead plate.
+.mag-header__wordmark {
+  padding: 4px 10px 2px;
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--mag-paper);
+  background: var(--mag-ink);
+
+  &:link,
+  &:visited {
+    color: var(--mag-paper);
+  }
+
+  &:hover {
+    text-decoration-color: var(--mag-accent);
+  }
+
+  @include govuk-media-query($until: tablet) {
+    font-size: 26px;
+  }
+}
+
+// The kicker is a red label stamped on the page.
+.mag-kicker {
+  display: inline-block;
+  padding: 2px 8px;
+  color: var(--mag-paper);
+  background: var(--mag-accent);
+}
+
+.mag-section {
+  border-top: 4px solid var(--mag-ink);
+}
+
+.mag-tile {
+  border-top: 2px solid var(--mag-ink);
+
+  &:first-child {
+    border-top: 6px solid var(--mag-accent);
+    padding-top: calc(#{govuk-spacing(3)} - 4px);
+  }
+}
+
+.mag-tile__value {
+  font-size: 48px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0;
+}
+
+.mag-card {
+  border-top: 6px solid var(--mag-ink);
+}
+
+.mag-footer {
+  border-top: 6px solid var(--mag-ink);
+}
+
+// Bars are blunt blocks, no rounded ends.
+.mag-bar__fill {
+  border-radius: 0;
+}
+
+.mag-bar__track {
+  height: 12px;
+}
+
+.mag-standfirst {
+  font-family: "Inter Variable", system-ui, sans-serif;
+  font-weight: 500;
 }

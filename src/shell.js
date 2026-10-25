@@ -2,7 +2,7 @@
 // the back-to-top link and the service worker.
 
 import '@fontsource-variable/inter';
-import '@fontsource-variable/inter-tight';
+import '@fontsource-variable/oswald';
 import '@fontsource/ibm-plex-mono/latin-400.css';
 import '@fontsource/ibm-plex-mono/latin-600.css';
 import './styles/main.scss';

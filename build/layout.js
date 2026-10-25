@@ -47,7 +47,7 @@ function head(site, page, file) {
   const title = page ? `${page.title} – ${site.name}` : file === 'index.html' ? `${site.name}: ${site.tagline}` : `${pageTitle(file)} – ${site.name}`;
   return `<meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#f3f0e8" />
     <meta name="description" content="${esc(page?.standfirst ?? site.tagline)}" />
     <title>${esc(title)}</title>
     <link rel="icon" href="./favicon.svg" type="image/svg+xml" />

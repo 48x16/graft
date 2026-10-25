@@ -45,8 +45,8 @@ npm run check-page -- <page> [--base URL]           # one page: sentences, axe, 
 - Neutral, precise language on sensitive subjects (see `docs/editorial.md`). No deaths or
   casualty counts. No data about identifiable individuals.
 - Open Government Licence (or equally open) data only. Check the licence before building.
-- House style: light only, white, sans (Inter Tight, Inter, IBM Plex Mono), black and grey,
-  magenta `#ca357c` as the one sparing accent. Never propose dark mode.
+- House style: light only, sans (Oswald, Inter, IBM Plex Mono), black and grey,
+  stamp red `#b3261e` as the one sparing accent, on grainy newsprint `#f3f0e8` with Oswald capitals for headings (the gritty style the user asked for). Never propose dark mode.
 - No chart relies on colour alone; every chart has a table or list twin.
 
 ## Done means
