@@ -1,0 +1,26 @@
+"Table 1: Long-term international migration into and out of the United Kingdom by nationality,"
+"using new approach to producing migration estimates [notes 16, 17 and 19]"
+This worksheet contains one table.
+Notes and definitions are referred to in this table. The text for these can be found in the corresponding worksheets.
+"Some shorthand is used in this table, P = provisional, R = revised, YE = Year Ending and EU = European Union."
+"Flow
+[note 2]","Period
+[note 10]","All Nationalities
+[note 1]","British
+[definition 2]","EU+
+[definition 3]","Non-EU+
+[definition 4]"
+Immigration,YE Dec 20,662000,,316000,294000
+Immigration,YE Jun 21,818000,176000,280000,363000
+Immigration,YE Jun 23,1466000,161000,124000,1182000
+Immigration,YE Dec 24 R,1012000,140000,91000,780000
+Immigration,YE Dec 25 P,813000,110000,76000,627000
+Emigration,YE Dec 20,569000,130000,247000,192000
+Emigration,YE Jun 21,567000,262000,184000,120000
+Emigration,YE Dec 24 R,680000,257000,155000,269000
+Emigration,YE Dec 25 P,642000,246000,118000,278000
+Net migration,YE Dec 20,93000,-78000,70000,101000
+Net migration,YE Jun 21,251000,-87000,95000,242000
+Net migration,YE Jun 23,924000,-91000,-30000,1045000
+Net migration,YE Dec 24 R,331000,-117000,-63000,511000
+Net migration,YE Dec 25 P,171000,-136000,-42000,350000

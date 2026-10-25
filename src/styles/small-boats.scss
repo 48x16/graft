@@ -1,0 +1,30 @@
+// Boats and Returns: the month-by-year heat table needs the full width on desktop, so its
+// section puts the sentence and method note side by side above the table.
+
+@media (min-width: 48.0625em) {
+  .mag-small-boats-full {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .mag-small-boats-full .mag-split__side {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    column-gap: 30px;
+    align-items: start;
+  }
+
+  .mag-small-boats-full .mag-split__side > h2 {
+    grid-column: 1 / -1;
+  }
+}
+
+.mag-small-boats-gap {
+  margin-bottom: 30px;
+}
+
+// Fourteen columns: tighter cell padding so a desktop screen shows the whole year.
+.mag-small-boats-full .mag-heat-table .govuk-table__cell,
+.mag-small-boats-full .mag-heat-table .govuk-table__header {
+  padding-right: 6px;
+  padding-left: 6px;
+}

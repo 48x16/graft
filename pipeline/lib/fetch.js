@@ -20,7 +20,12 @@ export function findLinks(html, base, pattern = /\.(csv|ods|xlsx|xls|zip)(\?|$)/
  * end of the path, or a RegExp, for names with a date in them). Throws on none or several.
  */
 export function findLink(html, base, fileName) {
-  const test = typeof fileName === 'string' ? (u) => decodeURIComponent(new URL(u).pathname).endsWith(`/${fileName}`) : (u) => fileName.test(decodeURIComponent(new URL(u).pathname));
+  // ONS links name the file in a query (/file?uri=/…/current/name.xlsx), GOV.UK ones in the path.
+  const pathOf = (u) => {
+    const url = new URL(u);
+    return decodeURIComponent(url.searchParams.get('uri') ?? url.pathname);
+  };
+  const test = typeof fileName === 'string' ? (u) => pathOf(u).endsWith(`/${fileName}`) : (u) => fileName.test(pathOf(u));
   const urls = findLinks(html, base, /./).filter(test);
   if (urls.length === 0) throw new Error(`No link to ${fileName} on ${base}`);
   if (urls.length > 1) throw new Error(`Several links to ${fileName} on ${base}: ${urls.join(', ')}`);

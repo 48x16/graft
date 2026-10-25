@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Born Abroad</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Office for National Statistics (Labour Force Survey, EMP06)</li>
+              <li><b>Covers</b> People in work by country of birth and nationality, UK</li>
+              <li><b>Updated</b> <span data-updated>the latest quarter</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">How many people in work were born outside the UK, and how that mix has shifted.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="share-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="share-title">Born outside the UK</h2>
+            <p class="govuk-body" id="share-summary"></p>
+            <p class="govuk-body-s">Labour Force Survey, UK: people aged 16 and over in employment, by country of birth, not seasonally adjusted, the same quarter each year. The total includes people who did not state a country of birth. <span id="share-reweight">Survey weights were revised partway through, a step in the series.</span> <span id="share-pandemic">ONS advises extreme caution with country-of-birth figures for the pandemic years (survey non-response); the chart dashes those years.</span> Response fell again from mid-2023, so recent figures are volatile. Official statistics, not accredited. Counts people in work, not arrivals.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Share of people in work born outside the UK</h3>
+            <div id="share-chart"></div>
+            <div id="share-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="mix-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="mix-title">EU and beyond</h2>
+            <p class="govuk-body" id="mix-summary"></p>
+            <p class="govuk-body-s">People aged 16 and over in work, UK, by country of birth. EU means the current 27 member states in every year; non-EU born means born outside both the UK and the EU. ONS stopped publishing finer breakdowns after 2019, so only these two groups are shown. Year-to-year moves are noisy; the same survey cautions apply. The figures count people in work, not jobs filled or taken.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">People in work born in the EU and outside it</h3>
+            <div id="mix-chart"></div>
+            <div id="mix-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="rates-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="rates-title">The rate gap</h2>
+            <p class="govuk-body" id="rates-summary"></p>
+            <p class="govuk-body-s">Employment rate: people in work as a share of all people aged 16 to 64 in each country-of-birth group, UK. Rates use ages 16 to 64; the counts above use 16 and over. The chart's axis does not start at zero. Same survey cautions as above.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Employment rate, people aged 16 to 64, by country of birth</h3>
+            <div id="rates-chart"></div>
+            <div id="rates-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="nationality-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="nationality-title">Born abroad, or not British</h2>
+            <p class="govuk-body" id="nationality-summary"></p>
+            <p class="govuk-body-s">Country of birth is where a person was born; nationality is the one they state in the survey. People aged 16 and over in work, UK. Same survey cautions as above.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="nationality-heading">People in work, latest quarter</h3>
+            <div id="nationality-chart"></div>
+            <div id="nationality-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-born-abroad.js"></script>
+  </body>
+</html>

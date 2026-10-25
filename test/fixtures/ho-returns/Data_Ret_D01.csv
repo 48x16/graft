@@ -1,0 +1,38 @@
+"Ret_D01: Returns from the UK by nationality, 2004 to 2026 Q2 - dataset"
+Year,Quarter,Nationality,Region,Return type group,Return type,Age,Sex,Return destination group,Number of returns
+2023,2023 Q3,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,20
+2023,2023 Q3,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2023,2023 Q3,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,30
+2023,2023 Q4,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,21
+2023,2023 Q4,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2023,2023 Q4,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,29
+2024,2024 Q1,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,22
+2024,2024 Q1,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2024,2024 Q1,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,28
+2024,2024 Q2,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,23
+2024,2024 Q2,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2024,2024 Q2,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,27
+2024,2024 Q3,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,24
+2024,2024 Q3,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2024,2024 Q3,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,26
+2024,2024 Q4,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,25
+2024,2024 Q4,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2024,2024 Q4,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,25
+2025,2025 Q1,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,26
+2025,2025 Q1,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2025,2025 Q1,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,24
+2025,2025 Q2,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,27
+2025,2025 Q2,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2025,2025 Q2,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,23
+2025,2025 Q3,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,28
+2025,2025 Q3,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2025,2025 Q3,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,22
+2025,2025 Q4,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,29
+2025,2025 Q4,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2025,2025 Q4,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,21
+2026,2026 Q1,Albania,Europe Other,Enforced return,Non-detained enforced removals,25 to 29,Male,Home country,30
+2026,2026 Q1,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2026,2026 Q1,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,20
+2026,2026 Q2,Albania,Europe Other,Enforced return,Non-detained Enforced removals,25 to 29,Male,Home Country,31
+2026,2026 Q2,India,Asia South,Voluntary return,Other verified returns,30 to 49,Male,Home country,50
+2026,2026 Q2,Brazil,America Latin and South,Refused entry at port and subsequently departed,Refused entry at port and subsequently departed,Unknown,Female,Other country,19

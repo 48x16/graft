@@ -24,23 +24,8 @@ export default {
     'ons-vacancies': { publisher: 'Office for National Statistics', title: 'Vacancies by industry (VACS02)', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peoplenotinwork/unemployment/datasets/vacanciesbyindustryvacs02', licence: 'ogl' },
     'ons-pay': { publisher: 'Office for National Statistics', title: 'Annual Survey of Hours and Earnings (Table 3) and PAYE Real Time Information', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/earningsandworkinghours/datasets/regionbyoccupation2digitsocashetable3', licence: 'ogl' },
     'ons-birth': { publisher: 'Office for National Statistics', title: 'Employment by country of birth and nationality (EMP06)', url: 'https://www.ons.gov.uk/employmentandlabourmarket/peopleinwork/employmentandemployeetypes/datasets/employmentbycountryofbirthandnationalityemp06', licence: 'ogl' },
-    example: {
-      publisher: 'Example publisher',
-      title: 'Example dataset',
-      url: 'https://www.gov.uk/',
-      licence: 'ogl',
-    },
   },
   pages: [
-    {
-      file: 'example.html',
-      kind: 'feature',
-      title: 'An example story',
-      standfirst: 'How a page is put together, on made-up figures. Delete it once a real page exists.',
-      icon: 'newspaper',
-      sources: ['example'],
-      ready: '#trend-table tbody tr',
-    },
     { file: 'jobs.html', kind: 'feature', title: 'Who Works', standfirst: 'Fifty years of work, worklessness and unfilled jobs, from the official surveys.', icon: 'hard-hat', sources: ['ons-labour', 'ons-vacancies'], ready: '#rate-table tbody tr' },
     { file: 'pay.html', kind: 'feature', title: 'Pay Packet', standfirst: "What a week's work pays, by job and by region, before inflation.", icon: 'banknote', sources: ['ons-pay'], ready: '#region-bars .mag-bar' },
     { file: 'born-abroad.html', kind: 'feature', title: 'Born Abroad', standfirst: 'How many people in work were born outside the UK, and how that mix has shifted.', icon: 'globe', sources: ['ons-birth'], ready: '#share-table tbody tr' },

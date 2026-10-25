@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Boats and Returns</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Home Office, Immigration system statistics</li>
+              <li><b>Covers</b> Small boat arrivals and returns, UK</li>
+              <li><b>Updated</b> <span data-updated>the latest year</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">Small boat arrivals by month, who arrives, and who is returned from the UK.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split mag-small-boats-full" aria-labelledby="month-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="month-title">By month</h2>
+            <p class="govuk-body" id="month-summary"></p>
+            <p class="govuk-body-s">Detected small boat arrivals: people, not boats, by date of arrival. Official statistics, not accredited. Recent months are revised as records are completed. The daily counts published elsewhere are not used. A dash marks a month not yet published; the latest year's total covers only the months published so far.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">People arriving on small boats each month</h3>
+            <div class="mag-table-scroll" role="region" aria-label="Small boat arrivals by year and month (scrolls sideways)" tabindex="0">
+              <table class="govuk-table" id="month-heat"></table>
+            </div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="perboat-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="perboat-title">People per boat</h2>
+            <p class="govuk-body" id="perboat-summary"></p>
+            <p class="govuk-body-s">People arriving divided by boats detected in the same period, by calendar year. A part year is labelled as such. Years with fewer than ten boats are left out.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Average people per boat each year</h3>
+            <div id="perboat-chart"></div>
+            <div id="perboat-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="who-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="who-title">Who arrives</h2>
+            <p class="govuk-body" id="who-summary"></p>
+            <p class="govuk-body-s">Nationality, sex and age as recorded on arrival, revised after later checks. <span id="who-not-recorded"></span> Shown by number only. The red marker is the year before.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="who-bars-title">Small boat arrivals by nationality</h3>
+            <div id="who-chart"></div>
+            <div id="who-table"></div>
+            <h3 class="govuk-heading-s">Recorded sex and age</h3>
+            <div id="who-tiles"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="claimed-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="claimed-title">Claiming asylum</h2>
+            <p class="govuk-body" id="claimed-summary"></p>
+            <p class="govuk-body-s">By calendar year of arrival, as shares of that year's small boat arrivals. Figures for each year's arrivals are updated once a year. Totals differ slightly from the arrivals counts above, which were taken from the records on a different date. Referrals for modern slavery alone are not shown, so the shares need not add up to 100%.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="claimed-bars-title">What arrivals did, latest full year</h3>
+            <div id="claimed-chart" class="mag-small-boats-gap"></div>
+            <div id="claimed-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="returns-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="returns-title">Returns</h2>
+            <p class="govuk-body" id="returns-summary"></p>
+            <p class="govuk-body-s">Returns from the UK of people with no right to stay, all routes of arrival. Returns are events, not people. The latest seven quarters are provisional, and voluntary returns are revised upwards as records are matched. The series has breaks in 2010 and October 2020. Returns of people who arrived by small boat count the first return after arrival, by date of return, so they cannot be compared with arrival dates; official statistics, not accredited.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Returns from the UK each year, by type</h3>
+            <div id="returns-chart"></div>
+            <div id="returns-table"></div>
+            <h3 class="govuk-heading-s">Returns of people who arrived by small boat, each quarter</h3>
+            <div id="returns-boat-chart"></div>
+            <div id="returns-boat-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-small-boats.js"></script>
+  </body>
+</html>

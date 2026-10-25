@@ -1,0 +1,16 @@
+Asy_D02: Asylum initial decisions - fixture (tiny real-shaped copy)
+Year,Quarter,Nationality,Region,Case outcome group,Case outcome,Age,Sex,Applicant type,UASC,Decisions
+2001,2001 Q3,Afghanistan,Asia Central,Refused,Other Refusals,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),100
+2001,2001 Q4,Afghanistan,Asia Central,Grant of Protection,Refugee Permission,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),20
+2002,2002 Q1,Afghanistan,Asia Central,Grant of Other Leave,Exceptional Leave to Remain,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),10
+2002,2002 Q2,Afghanistan,Asia Central,Withdrawn,Implicit Withdrawal,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),5
+2002,2002 Q3,Afghanistan,Asia Central,Refused,Other Refusals,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),10
+2002,2002 Q4,Afghanistan,Asia Central,Refused,Other Refusals,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),10
+2003,2003 Q2,Afghanistan,Asia Central,Refused,Other Refusals,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),10
+2003,2003 Q3,Pakistan,Asia South,Grant of Protection,Refugee Permission,30 to 49,Male,Main Applicant,Non-UASC,20
+2003,2003 Q4,Pakistan,Asia South,Refused,Other Refusals,30 to 49,Male,Main Applicant,Non-UASC,60
+2004,2004 Q1,Pakistan,Asia South,Administrative Outcome,Admin - Deceased,50 to 69,Male,Main Applicant,Non-UASC,3
+2004,2004 Q1,Pakistan,Asia South,Administrative Outcome,Admin - Other,30 to 49,Male,Main Applicant,Non-UASC,4
+2004,2004 Q2,Pakistan,Asia South,Grant of Protection,Refugee Permission,17 and under,Female,Dependant,Non-UASC,7
+2004,2004 Q2,Eritrea,Africa North,Grant of Protection,Refugee Permission,18 to 29,Male,Main Applicant,Non-UASC,30
+2004,2004 Q2,Iran,Middle East,Withdrawn,Implicit Withdrawal,18 to 29,Male,Main Applicant,Non-UASC,2

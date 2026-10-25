@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Who Works</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Office for National Statistics</li>
+              <li><b>Covers</b> Labour Force Survey and Vacancy Survey, UK</li>
+              <li><b>Updated</b> <span data-updated>the latest period</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">Fifty years of work, worklessness and unfilled jobs, from the official surveys.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="rate-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="rate-title">Fifty years in one line</h2>
+            <p class="govuk-body" id="rate-summary"></p>
+            <p class="govuk-body-s">Employment and economic inactivity rates of people aged 16 to 64. Labour Force Survey, UK, seasonally adjusted, rolling three-month periods; the chart shows every third period, so no two points overlap. Estimates before 1992 are modelled from earlier surveys. The LFS is official statistics, not accredited: ONS says short-term changes, especially from mid-2023 to 2024, should be read with caution.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Share of people aged 16 to 64 in work and economically inactive, UK</h3>
+            <div id="rate-chart"></div>
+            <div id="rate-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="sexes-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="sexes-title">Women in, men down</h2>
+            <p class="govuk-body" id="sexes-summary"></p>
+            <p class="govuk-body-s">Employment rate of men and of women aged 16 to 64, UK, seasonally adjusted. Labour Force Survey, with the same caveats: modelled before 1992, and recent short-term changes uncertain.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Employment rate of men and women aged 16 to 64, UK</h3>
+            <div id="sexes-chart"></div>
+            <div id="sexes-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="inactive-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="inactive-title">Out of work, not looking</h2>
+            <p class="govuk-body" id="inactive-summary"></p>
+            <p class="govuk-body-s">Economically inactive means neither in work nor looking for and available to start work. The reason is the main one people give. People aged 16 to 64, UK, seasonally adjusted, from 1993. Labour Force Survey: read recent short-term changes with caution.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">People aged 16 to 64 economically inactive, by main reason, UK</h3>
+            <div id="inactive-chart"></div>
+            <div id="inactive-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="youth-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="youth-title">Young and out of work</h2>
+            <p class="govuk-body" id="youth-summary"></p>
+            <p class="govuk-body-s">Unemployment is a share of the economically active (in work or looking for work), not of everyone in the age group. Young people in full-time education count if they are looking for work. Labour Force Survey, UK, seasonally adjusted; the 16 to 24 series starts in 1992.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Unemployment rate, 16 to 24 and all 16 and over, UK</h3>
+            <div id="youth-chart"></div>
+            <div id="youth-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="vacancies-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="vacancies-title">Unfilled jobs</h2>
+            <p class="govuk-body" id="vacancies-summary"></p>
+            <p class="govuk-body" id="vacancies-industry-summary"></p>
+            <p class="govuk-body-s">ONS Vacancy Survey of businesses, UK, rolling three-month periods, rounded to the nearest thousand. Leaves out agriculture, forestry and fishing, households and employment agencies. The latest period is provisional. The job openings rate is a new ONS measure from September 2026. Vacancies are not jobs filled, and say nothing about who fills them. Industries with very few vacancies get levels only, no percentage change.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Vacancies, UK</h3>
+            <div id="vacancies-chart"></div>
+            <div id="vacancies-table"></div>
+            <h3 class="govuk-heading-s">Vacancies by industry, latest period</h3>
+            <div id="industry-chart"></div>
+            <div id="industry-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-jobs.js"></script>
+  </body>
+</html>

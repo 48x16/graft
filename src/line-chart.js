@@ -10,6 +10,7 @@ import {
   format,
   line,
   max,
+  min,
   pointer,
   scaleLinear,
   scaleUtc,
@@ -24,9 +25,13 @@ const HEIGHT = 340;
 const NARROW = 520;
 /** Years from the first date to the last: longer charts get a year label every five years, not two. */
 const yearsShown = (dates) => (dates.at(-1) - dates[0]) / (365.25 * 24 * 3600 * 1000);
+/** Years between x-axis labels: fewer on phones and on long series, so labels never collide. */
+const axisYears = (narrow, span) => (narrow ? (span > 24 ? 10 : 4) : span > 40 ? 10 : span > 16 ? 5 : 2);
 const LABEL_GAP = 16;
 const count = new Intl.NumberFormat('en-GB');
-const tickCount = format('.3~s');
+const short = format('.3~s');
+/** Axis labels: 20k, 1.5M for big numbers; small ones as they are (".3~s" would make 0.2 "200m"). */
+const tickCount = (v) => (Math.abs(v) >= 1000 ? short(v) : count.format(v));
 const year = utcFormat('%Y');
 
 export const formatCount = (v) => (v === null ? 'Not published' : count.format(v));
@@ -52,10 +57,12 @@ function seriesKey(style) {
  * `formatValue` and `formatTick` format tooltip values and y-axis ticks; `totalLabel` names
  * the tooltip's total row (off by default: only add series that really sum, never shares).
  * The x axis is time by default; `formatX` makes it numeric (e.g. ages), with ticks so formatted.
+ * `zero: false` lets the y axis start near the lowest value: only for rates that sit in a narrow
+ * band (employment rates), never for counts, where a cut axis exaggerates change.
  */
 export function createChart(
   root,
-  { formatValue = formatCount, formatTick = tickCount, totalLabel = null, formatX = null } = {},
+  { formatValue = formatCount, formatTick = tickCount, totalLabel = null, formatX = null, zero = true } = {},
 ) {
   const legend = el('ul', 'mag-legend');
   const frame = el('div', 'mag-chart__frame');
@@ -96,7 +103,8 @@ export function createChart(
       .domain([dates[0], dates[dates.length - 1]])
       .range([m.left, width - m.right]);
     const y = scaleLinear()
-      .domain([0, max(plotted, (s) => max(s.values)) || 1])
+      // From zero, or below it when a series goes negative (net flows). All zeros: whole-number ticks.
+      .domain([zero ? Math.min(0, min(plotted, (s) => min(s.values)) ?? 0) : (min(plotted, (s) => min(s.values)) ?? 0), max(plotted, (s) => max(s.values)) || 10])
       .nice()
       .range([HEIGHT - m.bottom, m.top]);
     geometry = { x, y, m, width };
@@ -115,6 +123,25 @@ export function createChart(
       .attr('y1', (d) => y(d))
       .attr('y2', (d) => y(d));
 
+    if (y.domain()[0] < 0) {
+      svg.append('line').attr('class', 'mag-chart__zero').attr('x1', m.left).attr('x2', width - m.right).attr('y1', y(0)).attr('y2', y(0));
+    }
+
+    // Vertical markers (a method change, a policy date), labelled at the top; the page's method
+    // note must say the same thing in words.
+    const marks = svg.append('g').attr('class', 'mag-chart__markers');
+    for (const mark of data.markers) {
+      const mx = x(mark.date);
+      if (!(mx >= m.left && mx <= width - m.right)) continue;
+      marks.append('line').attr('class', 'mag-chart__marker').attr('x1', mx).attr('x2', mx).attr('y1', m.top).attr('y2', HEIGHT - m.bottom);
+      marks
+        .append('text')
+        .attr('class', 'mag-chart__marker-label')
+        .attr('x', mx + 4)
+        .attr('y', m.top + 10)
+        .text(mark.label);
+    }
+
     svg
       .append('g')
       .attr('class', 'mag-chart__axis')
@@ -122,7 +149,7 @@ export function createChart(
       .call(
         formatX
           ? axisBottom(x).ticks(narrow ? 5 : 10).tickFormat(formatX).tickSizeOuter(0)
-          : axisBottom(x).ticks(utcYear.every(narrow ? 4 : yearsShown(dates) > 16 ? 5 : 2)).tickFormat(year).tickSizeOuter(0),
+          : axisBottom(x).ticks(utcYear.every(axisYears(narrow, yearsShown(dates)))).tickFormat(year).tickSizeOuter(0),
       );
     svg
       .append('g')
@@ -258,10 +285,11 @@ export function createChart(
      * x axis (Dates, or numbers with `formatX`), `series` are { id, label, values, style? }
      * (values null where unknown), and `summary` is the chart's accessible name: one sentence
      * saying what it shows. Every chart also needs a table twin (renderTable in charts.js).
+     * `markers` (optional): [{ date, label }] vertical rules, e.g. a change of method.
      */
-    update({ labels, dates, series, summary }) {
+    update({ labels, dates, series, summary, markers = [] }) {
       const styled = series.map((s, i) => ({ ...s, style: s.style ?? `s${(i % 5) + 1}` }));
-      data = { labels, dates, series: styled, plotted: styled, focusIndex: null };
+      data = { labels, dates, series: styled, plotted: styled, markers, focusIndex: null };
       svg.attr('aria-label', summary);
       tooltip.hidden = true;
       drawLegend();

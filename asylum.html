@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Asylum Claims</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Home Office, immigration system statistics</li>
+              <li><b>Covers</b> Asylum claims, initial decisions, claims awaiting a decision and asylum support, UK</li>
+              <li><b>Updated</b> <span data-updated>the latest quarter</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">Claims, decisions and the queue in between, quarter by quarter.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="claims-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="claims-title">Claims</h2>
+            <p class="govuk-body" id="claims-summary"></p>
+            <p class="govuk-body-s">People claiming asylum in the UK, at port or after entry, in each year ending June. People are main applicants plus their dependants; the count of people starts when dependants were first recorded<span id="claims-people-start"></span>.<span id="claims-provisional"></span> The decisions made in a year do not relate to that year's claims.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">People claiming asylum, each year ending June</h3>
+            <div id="claims-chart"></div>
+            <div id="claims-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="awaiting-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="awaiting-title">The queue</h2>
+            <p class="govuk-body" id="awaiting-summary"></p>
+            <p class="govuk-body-s">Claims awaiting an initial decision at the end of each quarter, UK. Appeals and further reviews are left out throughout. People include dependants; cases are main applicants. Waiting time is counted from the date of the claim.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Awaiting an initial decision, at each quarter end</h3>
+            <div id="awaiting-chart"></div>
+            <div id="awaiting-table"></div>
+            <h3 class="govuk-heading-s" id="duration-title">How long they had waited, latest quarter</h3>
+            <div id="duration-chart"></div>
+            <div id="duration-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="rate-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="rate-title">Grant rate</h2>
+            <p class="govuk-body" id="rate-summary"></p>
+            <p class="govuk-body-s">Initial decisions on main applicants (cases), not people, UK. The grant rate is grants of protection or other leave as a share of grants and refusals; withdrawals and administrative outcomes are left out. Years with fewer than 100 grants and refusals are not shown. Appeals can change outcomes and are not shown.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Share of initial decisions that were grants, each year ending June</h3>
+            <div id="rate-chart"></div>
+            <div id="rate-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="nationality-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="nationality-title">By nationality</h2>
+            <p class="govuk-body" id="nationality-summary"></p>
+            <p class="govuk-body-s">The ten most common nationalities by number of people claiming asylum in the latest year ending June, ordered by claims, as published by the Home Office ("Other and unknown" left out). Grant rates are on initial decisions on main applicants in the same year, not necessarily the same people; a rate is shown only where there were at least 50 grants and refusals.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="nationality-chart-title">People claiming asylum, by nationality</h3>
+            <div id="nationality-chart" class="mag-asylum-nat"></div>
+            <div id="nationality-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="support-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="support-title">On support</h2>
+            <p class="govuk-body" id="support-summary"></p>
+            <p class="govuk-body-s">People receiving Home Office asylum support (Sections 95, 4 and 98) at the end of each quarter, UK, including dependants. Hotels are contingency accommodation<span id="support-hotel-start"></span>. Recent figures come from a new case system and are provisional. Unaccompanied children supported by local authorities are not included. For one area, see <a class="govuk-link" href="asylum-support.html">Support by Area</a>.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">People receiving asylum support, at each quarter end</h3>
+            <div id="support-chart"></div>
+            <div id="support-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-asylum.js"></script>
+  </body>
+</html>

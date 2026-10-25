@@ -1,0 +1,191 @@
+"Outcomes of applications for entry clearance visas, 2023 Q3 to 2026 Q2 - dataset [Notes 1,2,3]"
+Link to notes
+Link to contents
+Year,Quarter,Nationality,Region,Visa type group,Visa type,Visa type subgroup,Applicant type,Case outcome,Decisions
+2023,2023 Q3,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,400
+2023,2023 Q3,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2023,2023 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2023,2023 Q3,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2023,2023 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2023,2023 Q3,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2023,2023 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2023,2023 Q3,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2023,2023 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2023,2023 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2023,2023 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2023,2023 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2023,2023 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2023,2023 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2023,2023 Q3,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2023,2023 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2023,2023 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2023,2023 Q4,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,300
+2023,2023 Q4,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2023,2023 Q4,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2023,2023 Q4,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2023,2023 Q4,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2023,2023 Q4,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2023,2023 Q4,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2023,2023 Q4,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2023,2023 Q4,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2023,2023 Q4,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2023,2023 Q4,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2023,2023 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2023,2023 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2023,2023 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2023,2023 Q4,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2023,2023 Q4,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2023,2023 Q4,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2024,2024 Q1,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,200
+2024,2024 Q1,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2024,2024 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2024,2024 Q1,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2024,2024 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2024,2024 Q1,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2024,2024 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2024,2024 Q1,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2024,2024 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2024,2024 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2024,2024 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2024,2024 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2024,2024 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2024,2024 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2024,2024 Q1,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2024,2024 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2024,2024 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2024,2024 Q2,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,100
+2024,2024 Q2,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2024,2024 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2024,2024 Q2,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2024,2024 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2024,2024 Q2,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2024,2024 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2024,2024 Q2,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2024,2024 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2024,2024 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2024,2024 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2024,2024 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2024,2024 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2024,2024 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2024,2024 Q2,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2024,2024 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2024,2024 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2024,2024 Q3,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,50
+2024,2024 Q3,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2024,2024 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2024,2024 Q3,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2024,2024 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2024,2024 Q3,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2024,2024 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2024,2024 Q3,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2024,2024 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2024,2024 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2024,2024 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2024,2024 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2024,2024 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2024,2024 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2024,2024 Q3,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2024,2024 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2024,2024 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2025,2025 Q1,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,20
+2025,2025 Q1,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2025,2025 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2025,2025 Q1,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2025,2025 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2025,2025 Q1,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2025,2025 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2025,2025 Q1,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2025,2025 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2025,2025 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2025,2025 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2025,2025 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2025,2025 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2025,2025 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2025,2025 Q1,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2025,2025 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2025,2025 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2025,2025 Q2,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,10
+2025,2025 Q2,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2025,2025 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2025,2025 Q2,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2025,2025 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2025,2025 Q2,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2025,2025 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2025,2025 Q2,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2025,2025 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2025,2025 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2025,2025 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2025,2025 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2025,2025 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2025,2025 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2025,2025 Q2,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2025,2025 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2025,2025 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2025,2025 Q3,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,8
+2025,2025 Q3,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2025,2025 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2025,2025 Q3,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2025,2025 Q3,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2025,2025 Q3,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2025,2025 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2025,2025 Q3,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2025,2025 Q3,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2025,2025 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2025,2025 Q3,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2025,2025 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2025,2025 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2025,2025 Q3,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2025,2025 Q3,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2025,2025 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2025,2025 Q3,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2025,2025 Q4,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,6
+2025,2025 Q4,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2025,2025 Q4,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2025,2025 Q4,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2025,2025 Q4,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2025,2025 Q4,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2025,2025 Q4,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2025,2025 Q4,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2025,2025 Q4,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2025,2025 Q4,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2025,2025 Q4,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2025,2025 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2025,2025 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2025,2025 Q4,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2025,2025 Q4,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2025,2025 Q4,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2025,2025 Q4,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2026,2026 Q1,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,4
+2026,2026 Q1,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2026,2026 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2026,2026 Q1,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2026,2026 Q1,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2026,2026 Q1,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2026,2026 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2026,2026 Q1,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2026,2026 Q1,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2026,2026 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2026,2026 Q1,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2026,2026 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2026,2026 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2026,2026 Q1,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2026,2026 Q1,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2026,2026 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2026,2026 Q1,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0
+2026,2026 Q2,India,Asia South,Work,Worker,Health and Care Worker,Main Applicant,Issued,2
+2026,2026 Q2,India,Asia South,Work,Worker,Health and Care Worker,Dependant,Issued,50
+2026,2026 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Issued,200
+2026,2026 Q2,India,Asia South,Work,Worker,Skilled Worker,Dependant,Issued,100
+2026,2026 Q2,India,Asia South,Work,Worker,Skilled Worker,Main Applicant,Refused,20
+2026,2026 Q2,Kyrgyzstan,Asia Central,Work,Temporary Worker,Seasonal Worker (previously Tier 5),Main Applicant,Issued,300
+2026,2026 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Issued,500
+2026,2026 Q2,China,Asia East,Study,Sponsored study,Student,Dependant,Issued,10
+2026,2026 Q2,China,Asia East,Study,Sponsored study,Student,Main Applicant,Refused,25
+2026,2026 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Issued,90
+2026,2026 Q2,Pakistan,Asia South,Family,Family: Partner,Family: Partner,All,Refused,10
+2026,2026 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Issued,2000
+2026,2026 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Refused,500
+2026,2026 Q2,China,Asia East,Visitor,Visitor,Visitor,All,Withdrawn,30
+2026,2026 Q2,Ukraine,Europe Other,Other,Ukraine Visa Schemes,Ukraine Family Scheme,All,Issued,40
+2026,2026 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Issued,1
+2026,2026 Q2,Iceland,Europe Other,Visitor,Visitor,Visitor,All,Refused,0

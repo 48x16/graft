@@ -1,0 +1,59 @@
+"IER_D01: Number of detected arrivals via illegal routes to the UK, 2018 Q1 to 2026 Q2 - dataset"
+Year,Quarter,Method of entry,Nationality,Region,Sex,Age Group,Number of detections
+2024,2024 Q1,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,500
+2024,2024 Q3,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,100
+2024,2024 Q3,Small boat arrivals,Syria,Middle East,Male,25 to 39,80
+2024,2024 Q3,Small boat arrivals,Afghanistan,Asia Central,Female,17 and under,20
+2024,2024 Q3,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,10
+2024,2024 Q3,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,5
+2024,2024 Q3,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2024,2024 Q4,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,100
+2024,2024 Q4,Small boat arrivals,Syria,Middle East,Male,25 to 39,80
+2024,2024 Q4,Small boat arrivals,Afghanistan,Asia Central,Female,17 and under,20
+2024,2024 Q4,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,10
+2024,2024 Q4,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,5
+2024,2024 Q4,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2025,2025 Q1,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,100
+2025,2025 Q1,Small boat arrivals,Syria,Middle East,Male,25 to 39,80
+2025,2025 Q1,Small boat arrivals,Afghanistan,Asia Central,Female,17 and under,20
+2025,2025 Q1,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,10
+2025,2025 Q1,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,5
+2025,2025 Q1,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2025,2025 Q2,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,100
+2025,2025 Q2,Small boat arrivals,Syria,Middle East,Male,25 to 39,80
+2025,2025 Q2,Small boat arrivals,Afghanistan,Asia Central,Female,17 and under,20
+2025,2025 Q2,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,10
+2025,2025 Q2,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,5
+2025,2025 Q2,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2025,2025 Q3,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,150
+2025,2025 Q3,Small boat arrivals,Eritrea,Africa East,Female,17 and under,25
+2025,2025 Q3,Small boat arrivals,Syria,Middle East,Male,25 to 39,20
+2025,2025 Q3,Small boat arrivals,Somalia,Africa East,Unknown,Unknown,2
+2025,2025 Q3,Small boat arrivals,Not currently recorded,Not currently recorded,Not currently recorded,Not currently recorded,30
+2025,2025 Q3,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,12
+2025,2025 Q3,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,6
+2025,2025 Q3,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2025,2025 Q4,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,150
+2025,2025 Q4,Small boat arrivals,Eritrea,Africa East,Female,17 and under,25
+2025,2025 Q4,Small boat arrivals,Syria,Middle East,Male,25 to 39,20
+2025,2025 Q4,Small boat arrivals,Somalia,Africa East,Unknown,Unknown,2
+2025,2025 Q4,Small boat arrivals,Not currently recorded,Not currently recorded,Not currently recorded,Not currently recorded,30
+2025,2025 Q4,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,12
+2025,2025 Q4,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,6
+2025,2025 Q4,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2026,2026 Q1,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,150
+2026,2026 Q1,Small boat arrivals,Eritrea,Africa East,Female,17 and under,25
+2026,2026 Q1,Small boat arrivals,Syria,Middle East,Male,25 to 39,20
+2026,2026 Q1,Small boat arrivals,Somalia,Africa East,Unknown,Unknown,2
+2026,2026 Q1,Small boat arrivals,Not currently recorded,Not currently recorded,Not currently recorded,Not currently recorded,30
+2026,2026 Q1,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,12
+2026,2026 Q1,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,6
+2026,2026 Q1,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1
+2026,2026 Q2,Small boat arrivals,Eritrea,Africa East,Male,18 to 24,150
+2026,2026 Q2,Small boat arrivals,Eritrea,Africa East,Female,17 and under,25
+2026,2026 Q2,Small boat arrivals,Syria,Middle East,Male,25 to 39,20
+2026,2026 Q2,Small boat arrivals,Somalia,Africa East,Unknown,Unknown,2
+2026,2026 Q2,Small boat arrivals,Not currently recorded,Not currently recorded,Not currently recorded,Not currently recorded,30
+2026,2026 Q2,Inadequately documented air arrivals,Albania,Europe Other,Male,25 to 39,12
+2026,2026 Q2,Recorded detections in the UK,Vietnam,Asia South East,Male,25 to 39,6
+2026,2026 Q2,Recorded detections at UK ports,Iraq,Middle East,Male,18 to 24,1

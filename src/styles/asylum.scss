@@ -1,0 +1,12 @@
+// Asylum Claims: the grant rate printed under each nationality's name in the bars.
+
+.mag-asylum-nat .mag-bar {
+  margin-bottom: 6px;
+}
+
+.mag-asylum-rate {
+  display: block;
+  font-size: 14px;
+  line-height: 1.3;
+  color: var(--mag-ink-2);
+}

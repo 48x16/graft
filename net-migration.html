@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">In and Out</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Office for National Statistics, long-term international migration</li>
+              <li><b>Covers</b> People moving to or from the UK for a year or more, by nationality and reason</li>
+              <li><b>Updated</b> <span data-updated>the latest quarter</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">How many people came to live in the UK, how many left, and why.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="net-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="net-title">Net migration</h2>
+            <p class="govuk-body" id="net-summary"></p>
+            <p class="govuk-body-s">ONS long-term international migration, UK: people moving in or out for a year or more, in rolling years ending each quarter, rounded to the nearest 1,000. Official statistics in development: <span id="net-flags">recent figures are provisional and are revised as more travel data comes in</span>. Methods changed from the year ending June 2021, so earlier figures are not directly comparable. <span id="net-range"></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Arrivals, departures and net migration, UK</h3>
+            <div id="net-chart"></div>
+            <p class="govuk-body-s" id="net-break"></p>
+            <div id="net-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="groups-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="groups-title">British people leaving</h2>
+            <p class="govuk-body" id="groups-summary"></p>
+            <p class="govuk-body-s">UK, by nationality, from the year ending June 2021 (British figures before then are not comparable). Below zero, more people left than arrived. EU+ means the EU27 plus Norway, Iceland, Liechtenstein and Switzerland; non-EU+ is every other nationality. Values under 500 show as 0. Official statistics in development, rounded to the nearest 1,000.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Net migration by nationality, UK</h3>
+            <div id="groups-chart"></div>
+            <h3 class="govuk-heading-s" id="groups-bars-title">Net migration by nationality, latest year</h3>
+            <div id="groups-bars"></div>
+            <div id="groups-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="reasons-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="reasons-title">Why people come</h2>
+            <p class="govuk-body" id="reasons-summary"></p>
+            <p class="govuk-body-s">Non-EU+ nationals arriving in the UK only, by reason on arrival; later switches between visas are not counted. Asylum means people who claimed asylum within a year of arriving, by any route. Humanitarian means the BN(O), resettlement and Ukraine schemes. Rounded, so parts need not add up. Official statistics in development.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Non-EU+ arrivals by reason, UK</h3>
+            <div id="reasons-chart"></div>
+            <div id="reasons-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="dependants-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="dependants-title">Dependants</h2>
+            <p class="govuk-body" id="dependants-summary"></p>
+            <p class="govuk-body-s">Non-EU+ nationals arriving in the UK, by reason on arrival. A dependant arrived as the partner or child of a main applicant who came to work or study. Values under 500 show as 0. Official statistics in development.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Main applicants and dependants arriving, UK</h3>
+            <div id="dependants-chart"></div>
+            <div id="dependants-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="revisions-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="revisions-title">First guesses move</h2>
+            <p class="govuk-body" id="revisions-summary"></p>
+            <p class="govuk-body-s">UK net migration for one year, as first published and as revised in later releases. ONS revises its provisional estimates as 6 and then 12 months of travel data come in. Official statistics in development.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="revisions-bars-title">Net migration, release by release</h3>
+            <div id="revisions-chart"></div>
+            <div id="revisions-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-net-migration.js"></script>
+  </body>
+</html>

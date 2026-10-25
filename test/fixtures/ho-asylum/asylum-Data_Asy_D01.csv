@@ -1,0 +1,30 @@
+Asy_D01: Asylum claims - fixture (tiny real-shaped copy)
+Year,Quarter,Nationality,Region,Age,Sex,Applicant type,UASC,Location of claim,Claims
+2001,2001 Q3,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,100
+2001,2001 Q4,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),At Port,120
+2002,2002 Q1,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,90
+2002,2002 Q1,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Dependant,Total (pre-2006),In Country,30
+2002,2002 Q2,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,80
+2002,2002 Q2,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Dependant,Total (pre-2006),In Country,20
+2002,2002 Q3,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,70
+2002,2002 Q3,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Dependant,Total (pre-2006),In Country,10
+2002,2002 Q4,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,60
+2002,2002 Q4,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Dependant,Total (pre-2006),In Country,10
+2003,2003 Q2,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Main Applicant,Total (pre-2006),In Country,50
+2003,2003 Q2,Afghanistan,Asia Central,Total (pre-2009),Total (pre-2009),Dependant,Total (pre-2006),In Country,5
+2003,2003 Q3,Pakistan,Asia South,Unknown Age,Male,Main Applicant,Non-UASC,In Country,40
+2003,2003 Q3,Pakistan,Asia South,Unknown age,Male,Main Applicant,Non-UASC,In Country,5
+2003,2003 Q3,Pakistan,Asia South,17 and under,Female,Dependant,Non-UASC,In Country,15
+2003,2003 Q4,Eritrea,Africa North,18 to 29,Male,Main Applicant,Non-UASC,At Port,30
+2003,2003 Q4,Eritrea,Africa North,17 and under,Male,Dependant,UASC,At Port,2
+2004,2004 Q1,Other and unknown,Other,30 to 49,Male,Main Applicant,Non-UASC,In Country,500
+2004,2004 Q1,Albania,Europe Other,18 to 29,Male,Main Applicant,Non-UASC,In Country,9
+2004,2004 Q1,Iraq,Middle East,18 to 29,Male,Main Applicant,Non-UASC,In Country,8
+2004,2004 Q1,Iran,Middle East,18 to 29,Male,Main Applicant,Non-UASC,In Country,7
+2004,2004 Q1,Sudan,Africa North,18 to 29,Male,Main Applicant,Non-UASC,In Country,6
+2004,2004 Q1,Syria,Middle East,18 to 29,Male,Main Applicant,Non-UASC,In Country,5
+2004,2004 Q1,Yemen,Middle East,18 to 29,Male,Main Applicant,Non-UASC,In Country,4
+2004,2004 Q1,Vietnam,Asia South East,18 to 29,Male,Main Applicant,Non-UASC,In Country,3
+2004,2004 Q1,India,Asia South,18 to 29,Male,Main Applicant,Non-UASC,In Country,2
+2004,2004 Q1,Stateless,Other,18 to 29,Male,Main Applicant,Non-UASC,In Country,1
+2004,2004 Q2,Pakistan,Asia South,30 to 49,Female,Main Applicant,Non-UASC,In Country,10

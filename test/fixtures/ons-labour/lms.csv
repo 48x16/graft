@@ -1,0 +1,25 @@
+"Title","AWE: Whole Economy Level (£): Seasonally Adjusted Total Pay Excluding Arrears","Employment rate (aged 16 to 64, seasonally adjusted): %","Unemployment rate (aged 16 and over, seasonally adjusted): %","LFS: Economic inactivity rate: UK: All: Aged 16-64: %: SA","Male employment rate (aged 16 to 64, seasonally adjusted): %","Female employment rate (aged 16 to 64, seasonally adjusted): %","LFS: Unemployment rate: UK: All: Aged 16-24: %: SA","Number of People in Employment (aged 16 and over, seasonally adjusted):000s","LFS: Econ. inactivity reasons: Students: UK: 16-64: 000s: SA","LFS: Econ. inactivity reasons: Looking after family/home: UK: 16-64: 000s: SA","LFS: Econ. inactivity reasons: Long Term Sick: UK: 16-64:000s:SA","LFS: Econ. inactivity reasons: Retired: UK: 16-64:SA","LFS: Econ. inactivity reasons: Temp sick: UK: 16-64: 000s: SA","UK Vacancies (thousands) - Total"
+"CDID","KAB9","LF24","MGSX","LF2S","MGSV","LF25","MGWY","MGRZ","LF63","LF65","LF69","LF6B","LF67","AP2Y"
+"PreUnit","£","","","","","","","","","","","","",""
+"Unit","","%","%","%","%","%
+","%","000's","000s
+","000s
+
+","","","",""
+"Release Date","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026","20-10-2026"
+"Next release","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026","17 November 2026"
+"Important Notes","","[]","","","","","","","","","","","",""
+"1971","","71.8","4.1","25.0","91.4","52.7","","24507","","","","","",""
+"1971 Q1","","72.2","3.8","24.9","92.1","52.8","","24613","","","","","",""
+"1970 DEC","","","","","","","","","","","","","",""
+"1971 FEB","","72.2","3.8","24.9","92.1","52.8","","24613","","","","","",""
+"1971 MAR","","72.1","3.9","25.0","91.9","52.7","","24575","","","","","",""
+"1992 APR","","69.2","9.8","23.2","76.5","62.0","16.1","25636","","","","","",""
+"1993 APR","","68.4","10.5","23.5","75.0","61.8","18.0","25286","1451","3024","1813","1085","206",""
+"2019 JUL","542","75.9","3.9","20.9","80.1","71.9","11.8","32875","2307","2007","2067","1118","169","830"
+"2020 JAN","546","76.5","3.9","20.3","80.4","72.7","11.8","33181","2165","1872","2118","1118","174","808"
+"2025 JUL","728","75.1","4.8","21.0","77.9","72.4","14.6","34221","2328","1589","2824","1023","181","738"
+"2026 APR","753","75.1","4.9","20.9","78.2","72.2","16.4","34475","2446","1547","2747","1041","185","710"
+"2026 JUN","756","75.1","4.9","20.9","78.0","72.2","16.4","34478","2460","1535","2780","1049","","707"
+"2026 JUL","757","75.3","4.7","20.9","78.3","72.4","15.6","34577","2453","1559","2738","1080","186","704"
+"2026 AUG","757","","","","","","","","","","","","","691"

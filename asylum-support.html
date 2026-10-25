@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Tool</p>
+            <h1 class="govuk-heading-xl">Support by Area</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Home Office, immigration system statistics</li>
+              <li><b>Covers</b> People receiving asylum support, by local authority, UK</li>
+              <li><b>Updated</b> <span data-updated>the latest quarter</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">Find how many people receive asylum support in a local authority.</p>
+            <div id="hero-graphic">
+              <div class="govuk-form-group">
+                <label class="govuk-label govuk-label--s" for="area-select">Local authority</label>
+                <select class="govuk-select" id="area-select" name="area"></select>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="area-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="area-title">The area</h2>
+            <p class="govuk-body" id="area-summary" aria-live="polite"></p>
+            <p class="govuk-body-s">People receiving asylum support from the Home Office in this local authority, as at the date shown, by type of support. Counts of 10 or more are rounded to the nearest 5; smaller counts are shown as "fewer than 10". Excludes unaccompanied children supported by local authorities. Northern Ireland includes only people who claimed asylum there. Provisional figures.</p>
+          </div>
+          <div class="mag-split__main">
+            <div id="area-tiles"></div>
+            <div id="area-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="trend-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="trend-title">Since 2023</h2>
+            <p class="govuk-body" id="trend-summary"></p>
+            <p class="govuk-body-s">People in Home Office accommodation at the end of each quarter, and those of them in hotels. Excludes subsistence-only support, which had no area recorded for part of the period. Local authority boundaries as at April 2023. Counts under 10 are left as gaps in the chart and shown as "fewer than 10" in the table.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s" id="trend-heading">In accommodation and in hotels, each quarter</h3>
+            <div id="trend-chart"></div>
+            <div id="trend-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="region-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="region-title">The region</h2>
+            <p class="govuk-body" id="region-summary"></p>
+            <p class="govuk-body-s">All people on asylum support, as at the date shown. Region and UK totals are exact; local authority counts are rounded, so they need not add up to them.</p>
+          </div>
+          <div class="mag-split__main">
+            <div id="region-tiles"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-asylum-support.js"></script>
+  </body>
+</html>

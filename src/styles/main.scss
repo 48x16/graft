@@ -862,6 +862,24 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
   font-style: italic;
 }
 
+// Line chart extras: the zero line when values go negative, and labelled vertical markers.
+.mag-chart__zero {
+  stroke: var(--mag-ink);
+  stroke-width: 1;
+}
+
+.mag-chart__marker {
+  stroke: var(--mag-ink-2);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.mag-chart__marker-label {
+  fill: var(--mag-ink-2);
+  font-family: var(--mag-figure);
+  font-size: 12px;
+}
+
 // Graft's grit: thick rules, a stamped wordmark and kicker, figures in heavy condensed type.
 // Grouped here so the shared blocks above stay as the kit has them.
 

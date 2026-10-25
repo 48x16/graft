@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Visas Issued</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Home Office, immigration system statistics</li>
+              <li><b>Covers</b> Entry clearance visas and sponsored work visas, UK, years ending June</li>
+              <li><b>Updated</b> <span data-updated>the latest year</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">Who gets a UK visa, what for, and the care worker route that rose and fell.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="groups-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="groups-title">What visas are for</h2>
+            <p class="govuk-body" id="groups-summary"></p>
+            <p class="govuk-body-s">Source: Home Office entry clearance visa data. Entry clearance visas issued (applied for outside the UK), main applicants and dependants, each year ending June. A visa is not an arrival: some are never used. Extensions and switches made inside the UK are counted separately and not shown. Grant rate: visas issued as a share of visas issued or refused; withdrawn and lapsed applications are left out. <span data-provisional></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Entry clearance visas issued, by visa type, years ending June</h3>
+            <div id="groups-chart"></div>
+            <div id="groups-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="work-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="work-title">Work visas: peak and fall</h2>
+            <p class="govuk-body" id="work-summary"></p>
+            <p class="govuk-body-s">Source: Home Office entry clearance visa data, the Work visa type group, each year ending June. Dependants are partners and children, counted on the main applicant's route. Many join a worker who came in an earlier year, so dependants and main applicants in one year are not families. <span data-provisional></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Work visas issued, main applicants and dependants, years ending June</h3>
+            <div id="work-chart"></div>
+            <div id="work-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="care-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="care-title">The care worker years</h2>
+            <p class="govuk-body" id="care-summary"></p>
+            <p class="govuk-body-s">Line chart source: Home Office entry clearance visa data, main applicants, by quarter. The series starts in <span data-first-quarter>the first quarter shown</span>, with the routes of the points-based system; earlier Tier 2 visas are not joined on. From 11 March 2024, care workers could no longer bring dependants. On 22 July 2025, overseas recruitment of care workers and senior care workers closed.</p>
+            <p class="govuk-body-s">Occupation table source: Home Office sponsored work visas by occupation, main applicants only, matched to a Certificate of Sponsorship, so totals run a little below the visa figures. Figures from January 2021 to September 2024 are modelled. Not accredited official statistics. <span data-provisional></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Visas issued to main applicants, Health and Care Worker and Skilled Worker, by quarter</h3>
+            <div id="care-chart"></div>
+            <div id="care-quarters"></div>
+            <div class="mag-table-scroll mag-visas-subhead" role="region" aria-label="Health and Care Worker visas by occupation (scrolls sideways)" tabindex="0">
+              <table class="govuk-table" id="care-heat"></table>
+            </div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="dependants-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="dependants-title">Family members</h2>
+            <p class="govuk-body" id="dependants-summary"></p>
+            <p class="govuk-body-s">Source: Home Office entry clearance visa data, the latest year ending June. Many dependants join workers granted visas in earlier years, so this is not a measure of family size. <span data-provisional></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Visas issued to main applicants and dependants, by route</h3>
+            <div id="dependants-chart"></div>
+            <div id="dependants-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="jobs-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="jobs-title">The jobs behind the visas</h2>
+            <p class="govuk-body" id="jobs-summary"></p>
+            <p class="govuk-body-s">Source: Home Office sponsored work visas by occupation, main applicants only, the latest year ending June. Occupations are SOC 2020 unit groups, published from October 2024; a few small groups are suppressed and left out. Seasonal workers come for up to six months, mostly in horticulture. <span data-provisional></span></p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Most common jobs, Skilled Worker and Health and Care Worker visas, main applicants</h3>
+            <div id="jobs-chart"></div>
+            <div id="jobs-table"></div>
+            <h3 class="govuk-heading-s mag-visas-subhead">Sponsored work visas for main applicants, by route</h3>
+            <div id="routes-chart"></div>
+            <div id="routes-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-visas.js"></script>
+  </body>
+</html>

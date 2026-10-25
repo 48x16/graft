@@ -1,0 +1,34 @@
+// Pay Packet: long occupation and industry names get their own line on phones and a wider
+// name column from tablet up; table figures (preformatted as £ strings) sit right, under
+// their numeric headers.
+
+.mag-pay-bars {
+  max-width: 44em;
+}
+
+.mag-pay-bars .mag-bar {
+  grid-template-columns: 1fr 4.5em;
+  row-gap: 2px;
+  margin-bottom: 8px;
+  line-height: 1.25;
+}
+
+.mag-pay-bars .mag-bar__name {
+  grid-column: 1 / -1;
+}
+
+@media (min-width: 40.0625em) {
+  .mag-pay-bars .mag-bar {
+    grid-template-columns: minmax(12em, 1.5fr) 1fr 4.5em;
+    margin-bottom: 4px;
+  }
+
+  .mag-pay-bars .mag-bar__name {
+    grid-column: auto;
+  }
+}
+
+.mag-pay-table td.govuk-table__cell {
+  text-align: right;
+}
+

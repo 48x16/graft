@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en-GB" class="govuk-template">
+  <head>
+    <!--mag:head-->
+  </head>
+  <body class="govuk-template__body">
+    <!--mag:header-->
+    <div class="govuk-width-container">
+      <main class="govuk-main-wrapper" id="main-content">
+        <div class="mag-split mag-hero">
+          <div class="mag-split__side">
+            <p class="mag-kicker">Feature</p>
+            <h1 class="govuk-heading-xl">Pay Packet</h1>
+            <ul class="mag-credits">
+              <li><b>Data</b> Office for National Statistics (ASHE) and HMRC (PAYE Real Time Information)</li>
+              <li><b>Covers</b> Gross pay of employees, UK, before inflation</li>
+              <li><b>Updated</b> <span data-updated>the latest release</span></li>
+            </ul>
+          </div>
+          <div class="mag-split__main">
+            <p class="mag-standfirst">What a week's work pays, by job and by region, before inflation.</p>
+            <div id="hero-graphic"></div>
+          </div>
+        </div>
+
+        <section class="mag-section mag-split" aria-labelledby="headline-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="headline-title">A week's pay</h2>
+            <p class="govuk-body" id="headline-summary"></p>
+            <p class="govuk-body-s" id="headline-method">The Annual Survey of Hours and Earnings (ASHE) counts employee jobs, so someone with two jobs counts twice. It covers the UK in April each year.<span id="ashe-status"></span> PAYE Real Time Information covers payrolled employees only (no self-employed), mixes full-time and part-time work, and its latest month is a flash estimate that will be revised. All pay is gross and before inflation.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Median monthly pay of PAYE employees, UK</h3>
+            <div id="headline-chart"></div>
+            <div id="headline-table" class="mag-pay-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="region-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="region-title">London and the rest</h2>
+            <p class="govuk-body" id="region-summary"></p>
+            <p class="govuk-body-s" id="region-method">ASHE median gross weekly pay of full-time employees, by the region where they work, in April. The red marker is the UK median; regional medians do not average to the UK figure.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Full-time median gross weekly pay, by region of work</h3>
+            <div id="region-bars"></div>
+            <div id="region-table" class="mag-pay-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="occupation-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="occupation-title">The pay ladder</h2>
+            <p class="govuk-body" id="occupation-summary"></p>
+            <p class="govuk-body-s">Two-digit occupation groups of the Standard Occupational Classification (SOC 2020), full-time employees, UK, in April. ONS withholds estimates it judges unreliable; the table shows them as not published. The SOC 2020 series starts in 2021.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Full-time median gross weekly pay, by occupation group</h3>
+            <div id="occupation-bars"></div>
+            <div id="occupation-table" class="mag-pay-table"></div>
+          </div>
+        </section>
+
+        <section class="mag-section mag-split" aria-labelledby="payroll-title">
+          <div class="mag-split__side">
+            <h2 class="govuk-heading-l" id="payroll-title">Payroll count</h2>
+            <p class="govuk-body" id="payroll-summary"></p>
+            <p class="govuk-body-s">HMRC PAYE Real Time Information, UK, seasonally adjusted; accredited official statistics. Counts payrolled employees, not the self-employed. Regions are where employees live; industries are the employer's.</p>
+          </div>
+          <div class="mag-split__main">
+            <h3 class="govuk-heading-s">Payrolled employees, UK</h3>
+            <div id="payroll-chart"></div>
+            <div id="payroll-table" class="mag-pay-table"></div>
+            <h3 class="govuk-heading-s">Median monthly pay, by industry</h3>
+            <div id="industry-bars"></div>
+            <div id="industry-table" class="mag-pay-table"></div>
+            <h3 class="govuk-heading-s">Median monthly pay, by region of home</h3>
+            <div id="home-region-table" class="mag-pay-table"></div>
+          </div>
+        </section>
+        <!--mag:error-->
+        <!--mag:footer-->
+    <script type="module" src="/src/feature-pay.js"></script>
+  </body>
+</html>
