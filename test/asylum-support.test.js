@@ -41,11 +41,14 @@ describe('buildAsylumSupport on the fixture', () => {
 
   it('indexes every LAD code at the latest date, by name, without placeholders or old codes', () => {
     expect(out.index.updated).toBe('30 June 2024');
-    expect(out.index.areas).toEqual([
+    expect(out.index.areas.map(({ total, ...rest }) => rest)).toEqual([
       { slug: 'glasgow-city', name: 'Glasgow City', code: 'S12000049', region: 'Scotland' },
       { slug: 'leeds', name: 'Leeds', code: 'E08000035', region: 'Yorkshire and The Humber' },
       { slug: 'orkney-islands', name: 'Orkney Islands', code: 'S12000023', region: 'Scotland' },
     ]);
+    // The map's figures: each area's banded total, the same as in its own file, and the exact UK total.
+    for (const a of out.index.areas) expect(a.total).toEqual(area(a.slug).total);
+    expect(out.index.ukTotal).toBe(area('leeds').ukTotal);
     expect(out.areas.map((a) => a.slug)).toEqual(['glasgow-city', 'leeds', 'orkney-islands']);
   });
 

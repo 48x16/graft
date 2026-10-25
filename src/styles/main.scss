@@ -880,6 +880,107 @@ $mag-map-steps: (0: #ececec, 1: #c2c2c2, 2: #949494, 3: #5e5e5e, 4: #1f1f1f);
   font-size: 12px;
 }
 
+// Bubble map (src/bubble-map.js): councils as plain land, a circle per area sized by a count.
+// Exact figures are in the tooltip, the table twin and the page's picker.
+.mag-map {
+  position: relative;
+}
+
+.mag-map__svg {
+  display: block;
+  width: 100%;
+  max-height: 85vh;
+}
+
+.mag-map__land {
+  fill: var(--mag-wash);
+}
+
+.mag-map__borders {
+  fill: none;
+  stroke: var(--mag-paper);
+  stroke-width: 0.5px;
+  vector-effect: non-scaling-stroke;
+}
+
+.mag-map__bubble {
+  fill: var(--mag-ink);
+  fill-opacity: 0.55;
+  stroke: var(--mag-ink);
+  stroke-width: 0.75px;
+  vector-effect: non-scaling-stroke;
+  cursor: pointer;
+
+  &:hover {
+    stroke: var(--mag-accent);
+    stroke-width: 2px;
+  }
+}
+
+.mag-map__bubble--small {
+  fill: var(--mag-paper);
+  fill-opacity: 1;
+}
+
+.mag-map__picked {
+  fill: none;
+  stroke: var(--mag-accent);
+  stroke-width: 3px;
+  vector-effect: non-scaling-stroke;
+  pointer-events: none;
+}
+
+.mag-map__inset-frame {
+  fill: var(--mag-paper);
+  stroke: var(--mag-ink);
+  stroke-width: 1px;
+}
+
+.mag-map__inset-marker {
+  fill: none;
+  stroke: var(--mag-ink-2);
+  stroke-width: 1px;
+  stroke-dasharray: 3 2;
+}
+
+.mag-map__inset-label {
+  font-family: var(--mag-display);
+  font-size: 14px;
+  font-weight: 700;
+  text-transform: uppercase;
+  fill: var(--mag-ink);
+}
+
+.mag-map__tooltip {
+  min-width: 0;
+
+  p {
+    margin: 0;
+  }
+}
+
+.mag-map__key {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: govuk-spacing(2) govuk-spacing(4);
+  margin: govuk-spacing(2) 0;
+  padding: 0;
+  list-style: none;
+  font-family: var(--mag-figure);
+  font-size: 13px;
+}
+
+.mag-map__key-item {
+  display: flex;
+  align-items: center;
+  gap: govuk-spacing(1);
+
+  svg {
+    overflow: visible;
+  }
+}
+
 // Graft's grit: thick rules, a stamped wordmark and kicker, figures in heavy condensed type.
 // Grouped here so the shared blocks above stay as the kit has them.
 

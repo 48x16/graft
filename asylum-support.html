@@ -20,10 +20,16 @@
           <div class="mag-split__main">
             <p class="mag-standfirst">Find how many people receive asylum support in a local authority.</p>
             <div id="hero-graphic">
+              <h2 class="govuk-heading-s" id="map-title">People on asylum support, by local authority</h2>
+              <div id="uk-map"></div>
+              <div id="map-key"></div>
+              <p class="govuk-body-s">Each circle is one local authority, its area showing the number of people on asylum support there. Click a circle to see that area. Counts are rounded to the nearest 5; dots are areas with fewer than 10; no circle means none listed.</p>
+              <div id="map-table"></div>
               <div class="govuk-form-group">
                 <label class="govuk-label govuk-label--s" for="area-select">Local authority</label>
                 <select class="govuk-select" id="area-select" name="area"></select>
               </div>
+              <p class="govuk-body" id="hero-summary" aria-live="polite"></p>
             </div>
           </div>
         </div>

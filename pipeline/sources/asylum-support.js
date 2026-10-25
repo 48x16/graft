@@ -182,7 +182,12 @@ export function buildAsylumSupport(records) {
   });
 
   return {
-    index: { updated: dateWords(latest), areas: list.map(({ slug, name, code, region }) => ({ slug, name, code, region })) },
+    // Each area's banded total goes in the index too, for the UK map (one file instead of 346).
+    index: {
+      updated: dateWords(latest),
+      ukTotal,
+      areas: list.map(({ slug, name, code, region }, i) => ({ slug, name, code, region, total: areas[i].total })),
+    },
     areas,
   };
 }

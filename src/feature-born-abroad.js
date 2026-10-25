@@ -3,7 +3,7 @@
 // the data. Country of birth and nationality are different measures: each sentence names its own.
 
 import { $, startFeature } from './feature-page.js';
-import { bars, emptyNote, formatCount, formatPercent, oneIn, renderTable, roughly, tiles } from './charts.js';
+import { bars, emptyNote, formatCount, formatPercent, renderTable, roughly, tiles } from './charts.js';
 import { createChart } from './line-chart.js';
 
 const ok = (v) => v !== null && v !== undefined && Number.isFinite(v);
@@ -23,13 +23,6 @@ function yearSpan(ys) {
   const consecutive = ys.every((y, i) => i === 0 || y === ys[i - 1] + 1);
   return consecutive ? `${ys[0]} to ${ys.at(-1)}` : `${ys.slice(0, -1).join(', ')} and ${ys.at(-1)}`;
 }
-
-/** "22%" or "one in five" style share words: oneIn when it is close, else a percentage. */
-const shareWords = (a, b) => {
-  const wa = oneIn(a);
-  const wb = oneIn(b);
-  return wa && wb ? [wa, wb] : [formatPercent(a), formatPercent(b)];
-};
 
 startFeature('born-abroad', (data) => {
   const years = data.years ?? [];
@@ -80,12 +73,12 @@ startFeature('born-abroad', (data) => {
   if (last !== undefined) {
     const lead = `${roughly(lv.nonUkBorn[last])} of ${roughly(lv.total[last])}`;
     if (first !== last) {
-      const [now, then] = shareWords(share[last], share[first]);
+      const [now, then] = [rate(share[last]), rate(share[first])];
       $('share-summary').textContent =
         `${now[0].toUpperCase()}${now.slice(1)}${now.startsWith('one in') ? '' : ' of'} people aged 16 and over in work in the UK in ${at(years[last])} were born outside the UK: ${lead}. ` +
         `In ${at(years[first])} the share was ${then}.`;
     } else {
-      const now = formatPercent(share[last]);
+      const now = rate(share[last]);
       $('share-summary').textContent = `${now} of people aged 16 and over in work in the UK in ${at(years[last])} were born outside the UK: ${lead}.`;
     }
   } else {
@@ -212,7 +205,7 @@ startFeature('born-abroad', (data) => {
     const b = roughly(nn[nLast]);
     $('nationality-summary').textContent =
       nn[nLast] < nb[nLast]
-        ? `In ${at(years[nLast])}, ${a} people in work in the UK were born outside the UK, but ${b} held a non-UK nationality: many people born abroad are British citizens.`
+        ? `In ${at(years[nLast])}, ${a} people in work in the UK were born outside the UK, but ${b} held a non-UK nationality. Many people born abroad are British citizens.`
         : `In ${at(years[nLast])}, ${a} people in work in the UK were born outside the UK and ${b} held a non-UK nationality.`;
     $('nationality-heading').textContent = `People aged 16 and over in work, UK, ${at(years[nLast])}`;
     const scale = Math.max(nb[nLast], nn[nLast]);

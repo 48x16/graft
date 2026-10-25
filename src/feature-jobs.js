@@ -18,6 +18,8 @@ const points = (t) => {
   const n = (Math.abs(t) / 10).toFixed(1);
   return `${n} percentage point${n === '1.0' ? '' : 's'}`;
 };
+// A count that opens a sentence is spelled out.
+const NUMBER_WORDS = [null, 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve', 'Thirteen', 'Fourteen', 'Fifteen', 'Sixteen', 'Seventeen', 'Eighteen', 'Nineteen', 'Twenty'];
 const ok = (v) => v !== null && v !== undefined && Number.isFinite(v);
 
 /** Index of the largest (or smallest) non-null value; ties go to the earliest. -1 if none. */
@@ -97,22 +99,20 @@ startFeature('jobs', (data) => {
     const emp = lfs.employmentRate;
     const now = emp[last];
     if (ok(now)) {
-      const parts = [`In ${periods[last].label}, ${rate(now)} of people aged 16 to 64 in the UK were in work.`];
       const clauses = [];
       const prev = last >= 12 ? emp[last - 12] : null;
       if (ok(prev)) {
         const t = tenths(now, prev);
-        clauses.push(t === 0 ? `level with a year earlier (${rate(prev)})` : `${t > 0 ? 'above' : 'below'} a year earlier (${rate(prev)})`);
+        clauses.push(t === 0 ? `level with ${rate(prev)} a year earlier` : `${t > 0 ? 'up' : 'down'} from ${rate(prev)} a year earlier`);
       }
       // A "record" needs more than a year of history behind it.
       if (last >= 12) {
         const hi = extreme(emp);
         const gap = tenths(emp[hi], now);
-        if (gap <= 0) clauses.push(hi === last ? 'the highest on record' : `level with the record high, first reached in ${periods[hi].label}`);
-        else clauses.push(`${points(gap)} below the record high of ${rate(emp[hi])} in ${periods[hi].label}`);
+        if (gap <= 0) clauses.push(hi === last ? 'the highest on record' : `level with the record first reached in ${periods[hi].label}`);
+        else clauses.push(`${points(gap)} below the record of ${rate(emp[hi])} in ${periods[hi].label}`);
       }
-      if (clauses.length) parts.push(`That is ${list(clauses)}.`);
-      $('rate-summary').textContent = parts.join(' ');
+      $('rate-summary').textContent = `In ${periods[last].label}, ${rate(now)} of people aged 16 to 64 in the UK were in work${clauses.length ? `, ${list(clauses)}` : ''}.`;
     }
     lineWithTable({
       chartId: 'rate-chart',
@@ -134,17 +134,23 @@ startFeature('jobs', (data) => {
     if (f >= 0 && ok(men[last]) && ok(women[last]) && f < last) {
       const wT = tenths(women[last], women[f]);
       const mT = tenths(men[last], men[f]);
-      const verb = (t) => (t > 0 ? 'risen' : t < 0 ? 'fallen' : 'stayed');
-      const womenPart = wT === 0 ? `Women's employment rate is ${rate(women[last])}, the same as in ${periods[f].label}` : `Women's employment rate has ${verb(wT)} from ${rate(women[f])} in ${periods[f].label} to ${rate(women[last])}`;
-      const menPart = mT === 0 ? `men's is unchanged at ${rate(men[last])}` : `men's has ${verb(mT)} from ${rate(men[f])} to ${rate(men[last])}`;
+      const from = periods[f].label;
+      const to = periods[last].label;
+      const womenPart =
+        wT === 0
+          ? `The employment rate for women aged 16 to 64 was ${rate(women[last])} in ${to}, the same as in ${from}.`
+          : `The employment rate for women aged 16 to 64 ${wT > 0 ? 'rose' : 'fell'} from ${rate(women[f])} in ${from} to ${rate(women[last])} in ${to}.`;
+      const menPart = mT === 0 ? `For men it was unchanged at ${rate(men[last])}.` : `For men it ${mT > 0 ? 'rose' : 'fell'} from ${rate(men[f])} to ${rate(men[last])}.`;
+      // Gap in tenths of a point, men minus women; the sign says who is ahead.
       const gapNow = tenths(men[last], women[last]);
       const gapThen = tenths(men[f], women[f]);
+      const one = (t) => (Math.abs(t) / 10).toFixed(1);
       let gapSentence;
-      if (gapNow === 0) gapSentence = 'The two rates are now level.';
-      else if (gapNow < 0) gapSentence = `Women's rate is now ${points(gapNow)} above men's.`;
-      else if (Math.abs(gapNow) === Math.abs(gapThen)) gapSentence = `Men's rate is ${points(gapNow)} above women's, as it was then.`;
-      else gapSentence = `The gap is now ${points(gapNow)}, ${Math.abs(gapNow) < Math.abs(gapThen) ? 'narrower' : 'wider'} than the ${(Math.abs(gapThen) / 10).toFixed(1)} points it was then.`;
-      $('sexes-summary').textContent = `${womenPart}; ${menPart}. ${gapSentence}`;
+      if (gapNow === 0) gapSentence = `The two rates are now level, from a gap of ${points(gapThen)}.`;
+      else if (Math.sign(gapNow) !== Math.sign(gapThen)) gapSentence = `${gapNow < 0 ? "Women's" : "Men's"} rate is now ${points(gapNow)} above ${gapNow < 0 ? "men's" : "women's"}.`;
+      else if (Math.abs(gapNow) === Math.abs(gapThen)) gapSentence = `The gap is unchanged at ${points(gapNow)}.`;
+      else gapSentence = `The gap has ${Math.abs(gapNow) < Math.abs(gapThen) ? 'narrowed' : 'widened'} from ${one(gapThen)} percentage points to ${one(gapNow)}.`;
+      $('sexes-summary').textContent = `${womenPart} ${menPart} ${gapSentence}`;
     }
     if (f >= 0) {
       lineWithTable({
@@ -164,7 +170,7 @@ startFeature('jobs', (data) => {
     // 3. Out of work, not looking.
     const reasons = [
       { id: 'longTermSick', label: 'Long-term sick', words: 'long-term sickness', style: 's6' },
-      { id: 'student', label: 'Students', words: 'studying', style: 's1' },
+      { id: 'student', label: 'Students', words: 'study', style: 's1' },
       { id: 'familyHome', label: 'Looking after family or home', words: 'looking after family or home', style: 's2' },
       { id: 'retired', label: 'Retired', words: 'retirement', style: 's3' },
       { id: 'temporarySick', label: 'Temporarily sick', words: 'temporary sickness', style: 's4' },
@@ -175,8 +181,9 @@ startFeature('jobs', (data) => {
       const parts = [`${roughly(lts[last])} people aged 16 to 64 in the UK were economically inactive because of long-term sickness in ${periods[last].label}`];
       const pre = periods.findIndex((p) => p.key === '2020-01');
       if (pre >= 0 && pre < last && ok(lts[pre])) {
-        const d = lts[last] - lts[pre];
-        parts[0] += d === 0 ? `, the same as in ${periods[pre].label}` : `, ${d > 0 ? 'more' : 'fewer'} than in ${periods[pre].label} (${roughly(lts[pre])})`;
+        // Compared at the precision printed, so "up from 2.7 million" never repeats the figure.
+        const same = roughly(lts[last]) === roughly(lts[pre]);
+        parts[0] += same ? `, level with ${roughly(lts[pre])} in ${periods[pre].label}` : `, ${lts[last] > lts[pre] ? 'up' : 'down'} from ${roughly(lts[pre])} in ${periods[pre].label}`;
       }
       parts[0] += '.';
       const ranked = reasons.filter((r) => ok(r.values[last])).sort((a, b) => b.values[last] - a.values[last]);
@@ -184,8 +191,8 @@ startFeature('jobs', (data) => {
         const [top, second] = ranked;
         parts.push(
           top.id === 'longTermSick'
-            ? `It is now the most common reason, ahead of ${second.words} (${roughly(second.values[last])}).`
-            : `The most common reason is now ${top.words} (${roughly(top.values[last])}).`,
+            ? `Long-term sickness is now the most common reason, ahead of ${second.words} (${roughly(second.values[last])}).`
+            : `The most common reason is now ${top.words} (${roughly(top.values[last])}), ahead of long-term sickness.`,
         );
       }
       $('inactive-summary').textContent = parts.join(' ');
@@ -238,7 +245,7 @@ startFeature('jobs', (data) => {
     const clauses = [];
     if (vLast >= 3 && ok(vTotal[vLast - 3])) {
       const d = vTotal[vLast] - vTotal[vLast - 3];
-      clauses.push(d === 0 ? 'unchanged on the three months before' : `${d > 0 ? 'up' : 'down'} ${formatCount(Math.abs(d))} on the three months before`);
+      clauses.push(d === 0 ? 'unchanged on the three months before' : `${d > 0 ? 'up' : 'down'} ${roughly(Math.abs(d))} on the three months before`);
     }
     const pre = vPeriods.findIndex((p) => p.key === '2020-01');
     if (pre >= 0 && pre < vLast && ok(vTotal[pre])) {
@@ -272,13 +279,23 @@ startFeature('jobs', (data) => {
     if (vLast >= 0 && ok(vTotal[vLast]) && vTotal[vLast] > 0 && industries.length > 1) {
       const share = top.latest / vTotal[vLast];
       const words = oneIn(share);
-      parts.push(`${top.name} had the most vacancies, ${formatCount(top.latest)}: ${words ? `about ${words}` : formatPercent(share)} of the total.`);
+      parts.push(`${top.name} had the most vacancies in ${vPeriods[vLast].label}: ${formatCount(top.latest)}, ${words ? `about ${words}` : `${formatPercent(share)} of the total`}.`);
     }
     const compared = industries.filter((d) => ok(d.prePandemic));
     if (compared.length > 1) {
       const k = compared.filter((d) => d.latest < d.prePandemic).length;
       const n = compared.length;
-      parts.push(k === 0 ? `None of the ${n} industries is below its level of December 2019 to February 2020.` : k === n ? `All ${n} industries are below their level of December 2019 to February 2020.` : `${k} of ${n} industries are below their level of December 2019 to February 2020.`);
+      const preIdx = vPeriods.findIndex((p) => p.key === '2020-01');
+      const when = preIdx >= 0 ? vPeriods[preIdx].label : 'December 2019 to February 2020';
+      parts.push(
+        k === 0
+          ? `None of the ${n} industries is below its level of ${when}.`
+          : k === n
+            ? `All ${n} industries are below their level of ${when}.`
+            : NUMBER_WORDS[k]
+              ? `${NUMBER_WORDS[k]} of ${n} industries are below their level of ${when}.`
+              : `Of ${n} industries, ${k} are below their level of ${when}.`,
+      );
     }
     $('vacancies-industry-summary').textContent = parts.join(' ');
 

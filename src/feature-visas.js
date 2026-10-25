@@ -8,6 +8,9 @@ import { bars, el, emptyNote, formatCount, formatPercent, heatTable, list, lower
 import { createChart } from './line-chart.js';
 import './styles/visas.scss';
 
+// Shorter names in prose for a few long SOC 2020 unit groups (by code); others use the data's name.
+const SHORT_JOBS = { 2134: 'programmers and software developers', 2422: 'finance and investment analysts' };
+const shortJob = (j) => SHORT_JOBS[j.code] ?? lower(j.name);
 const ok = (v) => v !== null && v !== undefined && Number.isFinite(v);
 const cap = (s) => s[0].toUpperCase() + s.slice(1);
 /** Index of the last usable value, or -1. */
@@ -66,14 +69,14 @@ startFeature('visas', (data) => {
         { n: at('study'), what: 'for study' },
         { n: at('work'), what: 'for work' },
       ].sort((a, b) => b.n - a.n);
-      text += ` Visitor visas made up ${formatPercent(visitorShare)} of them; ${roughly(pair[0].n)} were ${pair[0].what} and ${roughly(pair[1].n)} ${pair[1].what}.`;
+      text += ` ${formatPercent(visitorShare)} were visitor visas; ${roughly(pair[0].n)} were ${pair[0].what} and ${roughly(pair[1].n)} ${pair[1].what}.`;
     }
     const rated = GROUPS.filter((g) => g.id !== 'other' && ok(grantRate[g.id]));
     if (ok(grantRate.all) && rated.length >= 2) {
       const sorted = [...rated].sort((a, b) => grantRate[b.id] - grantRate[a.id]);
       const hi = sorted[0];
       const lo = sorted.at(-1);
-      text += ` Of applications issued or refused, ${formatPercent(grantRate.all)} were issued: from ${formatPercent(grantRate[hi.id])} for ${lower(hi.label)} visas to ${formatPercent(grantRate[lo.id])} for ${lower(lo.label)} visas.`;
+      text += ` Of applications issued or refused, ${formatPercent(grantRate.all)} were issued, from ${formatPercent(grantRate[lo.id])} for ${lower(lo.label)} visas to ${formatPercent(grantRate[hi.id])} for ${lower(hi.label)} visas.`;
     }
     $('groups-summary').textContent = text;
 
@@ -121,9 +124,9 @@ startFeature('visas', (data) => {
     }
     text += parts.length ? `: ${list(parts)}.` : '.';
     const pk = peakIndex(wv);
-    if (pk >= 0 && pk !== wi) text += ` The peak was ${roughly(wv[pk])} in the ${years[pk].label}.`;
+    if (pk >= 0 && pk !== wi) text += ` The peak was ${roughly(wv[pk])}, in the ${years[pk].label}.`;
     if (ok(work.main?.[wi]) && ok(work.dependant?.[wi])) {
-      text += ` Of the ${years[wi].label} total, ${formatCount(work.main[wi])} went to main applicants and ${formatCount(work.dependant[wi])} to dependants.`;
+      text += ` Of the latest total, ${roughly(work.main[wi])} went to main applicants and ${roughly(work.dependant[wi])} to dependants.`;
     }
     $('work-summary').textContent = text;
 
@@ -155,7 +158,7 @@ startFeature('visas', (data) => {
     const counted = hc.filter(ok).length;
     const pk = peakIndex(hc);
     if (counted >= 4 && pk !== qi) {
-      careText.push(`Health and Care Worker visas for main applicants peaked at ${formatCount(hc[pk])} in ${quarters[pk].label}; in ${qLabel(quarters[qi])}, ${formatCount(hc[qi])} were issued.`);
+      careText.push(`Health and Care Worker visas for main applicants peaked at ${formatCount(hc[pk])} in ${quarters[pk].label}. In ${qLabel(quarters[qi])}, ${formatCount(hc[qi])} were issued.`);
     } else if (counted >= 4) {
       careText.push(`${formatCount(hc[qi])} Health and Care Worker visas were issued to main applicants in ${qLabel(quarters[qi])}, the most in any quarter shown.`);
     } else {
@@ -204,7 +207,7 @@ startFeature('visas', (data) => {
     const firstTop = largestAt(0);
     if (nowTop && byGroup[nowTop.id][ci] > 0 && oy.length > 1) {
       const verb = firstTop && firstTop.id === nowTop.id ? 'are still' : 'are now';
-      careText.push(`${nowTop.subject} ${verb} the largest group on the route: ${formatCount(byGroup[nowTop.id][ci])} visas.`);
+      careText.push(`${nowTop.subject} ${verb} the largest group on the route, with ${formatCount(byGroup[nowTop.id][ci])} visas in the ${oy[ci].label}.`);
     }
   }
   $('care-summary').textContent = careText.length ? careText.join(' ') : 'No Health and Care Worker figures are available in this data.';
@@ -225,18 +228,19 @@ startFeature('visas', (data) => {
   const shown = ROUTES.filter((r) => ok(routeShares[r.id]?.main) && ok(routeShares[r.id]?.dependant));
   if (shown.length) {
     const big = (r) => routeShares[r.id].main + routeShares[r.id].dependant >= 100;
-    const full = (r) => {
-      const { main, dependant } = routeShares[r.id];
-      return big(r)
-        ? `${formatPercent(dependant / (main + dependant))} of ${r.name} visas went to dependants (${formatCount(dependant)}, against ${formatCount(main)} to main applicants)`
-        : `${r.name} visas went to ${formatCount(dependant)} dependants and ${formatCount(main)} main applicants`;
-    };
-    let text = `In the ${latest}, ${full(shown[0])}`;
-    if (shown[1] && big(shown[0]) && big(shown[1])) {
-      const { main, dependant } = routeShares[shown[1].id];
-      text += `, as did ${formatPercent(dependant / (main + dependant))} of ${shown[1].name} visas (${formatCount(dependant)} against ${formatCount(main)})`;
-    } else if (shown[1]) text += `; ${full(shown[1])}`;
-    $('dependants-summary').textContent = `${text}.`;
+    const share = (r) => formatPercent(routeShares[r.id].dependant / (routeShares[r.id].main + routeShares[r.id].dependant));
+    const [r0, r1] = shown;
+    const { main: m0, dependant: d0 } = routeShares[r0.id];
+    let text = big(r0)
+      ? `Dependants received ${share(r0)} of ${r0.name} visas in the ${latest}: ${formatCount(d0)}, against ${formatCount(m0)} for main applicants.`
+      : `${r0.name} visas in the ${latest} went to ${formatCount(d0)} dependants and ${formatCount(m0)} main applicants.`;
+    if (r1) {
+      const { main: m1, dependant: d1 } = routeShares[r1.id];
+      text += big(r1)
+        ? ` On the ${r1.name} route the share was ${share(r1)} (${formatCount(d1)} against ${formatCount(m1)}).`
+        : ` On the ${r1.name} route, ${formatCount(d1)} went to dependants and ${formatCount(m1)} to main applicants.`;
+    }
+    $('dependants-summary').textContent = text;
 
     const scale = Math.max(...shown.flatMap((r) => [routeShares[r.id].main, routeShares[r.id].dependant]));
     const cols = el('div');
@@ -273,9 +277,9 @@ startFeature('visas', (data) => {
   const top = (occupation.topJobs ?? []).filter((j) => ok(j.grants));
   const jobsText = [];
   if (top.length) {
-    let s = `In the occupation data, ${lower(top[0].name)} had the most Skilled Worker and Health and Care Worker visas for main applicants in the ${occLatest} (${formatCount(top[0].grants)})`;
-    const next = top.slice(1, 3).map((j) => lower(j.name));
-    s += next.length ? `, followed by ${list(next)}.` : '.';
+    let s = `In the occupation data, ${lower(top[0].name)} had the most Skilled Worker and Health and Care Worker visas for main applicants in the ${occLatest}: ${formatCount(top[0].grants)}.`;
+    const next = top.slice(1, 3).map((j) => `${shortJob(j)} (${formatCount(j.grants)})`);
+    if (next.length) s += ` Next came ${list(next)}.`;
     jobsText.push(s);
     $('jobs-chart').append(bars(top.map((j) => ({ label: j.name, value: j.grants })), top[0].grants, 'mag-bars mag-visas-bars'));
     $('jobs-table').append(

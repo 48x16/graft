@@ -96,22 +96,19 @@ function drawClaims(years, people, mainApplicants, last) {
   const y = years[last];
   const prev = last > 0 ? people[last - 1] : null;
   let sentence = `${roughly(v)} people claimed asylum in the UK in the ${y.label}`;
-  let record = false;
+  const peak = extremeIndex(people);
+  const began = `the series began in the ${years[pFirst].label}`;
   if (isNum(prev) && prev > 0 && prev !== v) {
     const down = v < prev;
     sentence += `, ${down ? 'down' : 'up'} ${formatPercent(Math.abs(v / prev - 1))} on the year before`;
     const j = sinceIndex(people, last, down);
-    if (j >= 0) sentence += `, and the ${down ? 'fewest' : 'most'} since the ${years[j].label}`;
-    else {
-      sentence += `, the ${down ? 'fewest' : 'most'} in any year ending June since ${years[pFirst].year}`;
-      record = !down;
-    }
+    if (j >= 0) sentence += ` and the ${down ? 'fewest' : 'most'} since the ${years[j].label}`;
+    else if (down) sentence += ` and the fewest since ${began}`;
   }
   sentence += '.';
-  const peak = extremeIndex(people);
-  if (!record && peak >= 0 && peak !== last && peak > pFirst) {
-    sentence += ` The most in any year ending June since ${years[pFirst].year} was ${roughly(people[peak])}, in the ${years[peak].label}.`;
-  }
+  if (peak === last && last > pFirst) sentence += ` That is the most since ${began}.`;
+  else if (peak === pFirst && peak !== last) sentence += ` The peak was ${roughly(people[peak])}, in the ${years[peak].label}, when the series began.`;
+  else if (peak >= 0 && peak !== last) sentence += ` The peak was ${roughly(people[peak])}, in the ${years[peak].label}: the most since ${began}.`;
   $('claims-summary').textContent = sentence;
 
   const series = [{ id: 'people', label: 'People (main applicants and dependants)', values: people, style: 's6' }];
@@ -216,7 +213,7 @@ function drawRate(years, decisions, grantRate, last) {
   const lo = extremeIndex(grantRate, false);
   const hi = extremeIndex(grantRate, true);
   if (first >= 0 && lo !== hi && last - first >= 2) {
-    sentence += ` Since the ${years[first].label}, it has ranged from ${formatPercent(grantRate[lo])} (${years[lo].label}) to ${formatPercent(grantRate[hi])} (${years[hi].label}).`;
+    sentence += ` Since the series began in the ${years[first].label}, the rate has ranged from ${formatPercent(grantRate[lo])} (${years[lo].label}) to ${formatPercent(grantRate[hi])} (${years[hi].label}).`;
   }
   $('rate-summary').textContent = sentence;
 
@@ -250,10 +247,12 @@ function drawNationalities(list, latestYear) {
   }
   const label = latestYear?.label ?? 'latest year';
   const top = rows[0];
-  let sentence = `The most common nationality claiming asylum in the ${label} was ${top.name} (${roughly(top.claims)} people).`;
-  const rates = rows.map((n) => n.grantRate).filter(isNum);
-  if (rows.length >= 3 && rates.length >= 2 && Math.min(...rates) !== Math.max(...rates)) {
-    sentence += ` Among the ${numberWord(rows.length)} most common nationalities, grant rates at initial decision ranged from ${formatPercent(Math.min(...rates))} to ${formatPercent(Math.max(...rates))}.`;
+  let sentence = `${top.name} was the most common nationality claiming asylum in the ${label}: ${roughly(top.claims)} people.`;
+  const rated = rows.filter((n) => isNum(n.grantRate));
+  const lo = rated.reduce((a, n) => (!a || n.grantRate < a.grantRate ? n : a), null);
+  const hi = rated.reduce((a, n) => (!a || n.grantRate > a.grantRate ? n : a), null);
+  if (rows.length >= 3 && rated.length >= 2 && lo.grantRate !== hi.grantRate) {
+    sentence += ` Among the ${numberWord(rows.length)} most common nationalities, grant rates at initial decision ranged from ${formatPercent(lo.grantRate)} (${lo.name}) to ${formatPercent(hi.grantRate)} (${hi.name}).`;
   }
   $('nationality-summary').textContent = sentence;
   $('nationality-chart-title').textContent = `People claiming asylum, by nationality, ${label}`;

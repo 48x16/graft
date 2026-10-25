@@ -3,8 +3,10 @@
 // { n, band }: n is rounded to the nearest 5, or null with band "fewer than 10". Areas are
 // never ranked.
 
+import topology from '../data/geo/councils.json';
+import { createBubbleMap, sizeKey } from './bubble-map.js';
 import { $, startFeature } from './feature-page.js';
-import { emptyNote, formatCount, formatPercent, renderTable, roughly, tiles } from './charts.js';
+import { emptyNote, formatCount, formatPercent, renderTable, tiles } from './charts.js';
 import { createChart } from './line-chart.js';
 import { loadItem } from './data.js';
 
@@ -39,6 +41,37 @@ startFeature('asylum-support', (index) => {
   }
   for (const a of areas) select.append(new Option(a.name, a.slug));
 
+  // The UK map: a circle per area, sized by its (rounded) total; clicking one picks it.
+  const byCode = new Map(areas.map((a) => [a.code, a]));
+  const map = createBubbleMap($('uk-map'), {
+    topology,
+    onPick: (code) => {
+      if (byCode.has(code)) location.hash = byCode.get(code).slug;
+    },
+  });
+  const total = (a) => a.total ?? { n: 0, band: null };
+  const radius = map.update({
+    values: new Map(areas.map((a) => [a.code, total(a).n])),
+    text: new Map(areas.map((a) => [a.code, `${capital(countText(total(a)))} ${total(a).n === 1 ? 'person' : 'people'}`])),
+    label: `Map of the UK with a circle on each local authority, sized by the number of people on asylum support there on ${index.updated}. Every figure is in the table below the map and in the area picker.`,
+  });
+  const largest = Math.max(0, ...areas.map((a) => total(a).n ?? 0));
+  const step = 10 ** Math.floor(Math.log10(Math.max(1, largest)));
+  const keyValues = largest >= 1000 ? [100, 1000, Math.floor(largest / step) * step] : largest >= 100 ? [10, 100] : [];
+  $('map-key').replaceChildren(sizeKey(radius, [...new Set(keyValues)].filter((v) => v <= largest), formatCount));
+  // The map's twin: every area, alphabetical (never ranked).
+  $('map-table').replaceChildren(
+    alignFigures(
+      renderTable({
+        caption: `People on asylum support by local authority, ${index.updated}`,
+        head: ['Local authority', 'Region', 'People'],
+        rows: areas.map((a) => [a.name, a.region, countText(total(a))]),
+      }),
+    ),
+  );
+  // Region is text, not a figure: keep it left-aligned.
+  for (const tr of $('map-table').querySelectorAll('tbody tr')) tr.children[1]?.classList.remove('govuk-table__cell--numeric');
+
   const chart = createChart($('trend-chart'), { formatValue: (v) => (v === null ? 'fewer than 10' : formatCount(v)) });
   // Too-small trends get a note instead of a flat line: the table still lists every quarter.
   const tooSmall = emptyNote('p', 'Too few people here to chart: every quarter is under 10.');
@@ -53,6 +86,7 @@ startFeature('asylum-support', (index) => {
 
   async function show(slug) {
     select.value = slug;
+    map.highlight(areas.find((a) => a.slug === slug)?.code);
     const ticket = ++current;
     let area;
     try {
@@ -73,15 +107,21 @@ startFeature('asylum-support', (index) => {
   function render(a) {
     const hotels = a.byAccommodation.find((b) => b.type === 'Hotels')?.count ?? { n: 0, band: null };
 
+    // The hero line under the picker: the UK, then the area picked.
+    $('hero-summary').textContent =
+      a.ukTotal === null || a.ukTotal === undefined
+        ? ''
+        : `${formatCount(a.ukTotal)} people were on asylum support across the UK on ${a.date}. ${a.total.n === 0 ? `None were in ${a.name}` : `${capital(countText(a.total))} were in ${a.name}`}.`;
+
     // The area: the sentence, three tiles and the table by type of support.
     let sentence;
     if (a.total.n === 0) sentence = `No one was receiving asylum support in ${a.name} on ${a.date}.`;
     else {
-      sentence = `${capital(countText(a.total))} people were receiving asylum support in ${a.name} on ${a.date}.`;
+      const share = a.total.n !== null && a.shareOfUk !== null && a.shareOfUk !== undefined ? `: ${shareText(a.shareOfUk)} of the UK total` : '';
+      sentence = `${capital(countText(a.total))} people were receiving asylum support in ${a.name} on ${a.date}${share}.`;
       if (a.total.n !== null) {
-        if (hotels.n === null) sentence += ` Of these, ${countText(hotels)} were in hotels.`;
-        else if (hotels.n > 0) sentence += ` Of these, ${formatCount(hotels.n)} were in hotels.`;
-        if (a.shareOfUk !== null && a.shareOfUk !== undefined) sentence += ` That is ${shareText(a.shareOfUk)} of everyone on asylum support in the UK.`;
+        if (hotels.n === null) sentence += ` ${capital(countText(hotels))} of them were in hotels.`;
+        else if (hotels.n > 0) sentence += ` ${formatCount(hotels.n)} of them were in hotels.`;
       }
     }
     $('area-summary').textContent = sentence;
@@ -150,7 +190,7 @@ startFeature('asylum-support', (index) => {
     // The region: exact totals.
     const hasRegion = a.region && a.region !== 'Unknown' && a.regionTotal !== null && a.regionTotal !== undefined;
     $('region-summary').textContent = hasRegion
-      ? `${a.region} had ${roughly(a.regionTotal)} people on asylum support on ${a.date}, out of ${roughly(a.ukTotal)} across the UK.`
+      ? `${a.region} had ${formatCount(a.regionTotal)} people on asylum support on ${a.date}: ${formatPercent(a.regionTotal / a.ukTotal)} of the UK's ${formatCount(a.ukTotal)}.`
       : '';
     const regionTiles = [];
     if (hasRegion) regionTiles.push({ value: formatCount(a.regionTotal), label: `people on asylum support in ${a.region}` });

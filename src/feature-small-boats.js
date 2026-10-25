@@ -66,7 +66,7 @@ startFeature('small-boats', (data) => {
     }),
   );
   if (busiest && busiest.v > 0) {
-    monthSentences.push(`The busiest month since ${monthYears[0]} was ${MONTHS[busiest.m]} ${monthYears[busiest.r]}: ${formatCount(busiest.v)} people.`);
+    monthSentences.push(`The busiest month on record (since January ${monthYears[0]}) was ${MONTHS[busiest.m]} ${monthYears[busiest.r]}: ${formatCount(busiest.v)} people.`);
   }
   // Season line: the latest year with all twelve months published and at least 100 arrivals.
   const fullYear = monthYears
@@ -138,17 +138,16 @@ startFeature('small-boats', (data) => {
   if (named.length && known(latestArrivals) && latestArrivals >= MIN_BASE) {
     const top = named.slice(0, 5);
     const share = sum(top.map((n) => n.arrivals)) / latestArrivals;
-    const which = top.length === 1 ? `the nationality ${top[0].name}` : `one of ${NUMBER_WORDS[top.length]} nationalities: ${list(top.map((n) => n.name))}`;
-    whoSentences.push(
-      share > 0.5
-        ? `Most small boat arrivals in the ${latestLabel} (${formatPercent(share)}) were recorded with ${which}.`
-        : `${formatPercent(share)} of small boat arrivals in the ${latestLabel} were recorded with ${which}.`,
-    );
+    const word = NUMBER_WORDS[top.length];
+    const subject = `${word[0].toUpperCase()}${word.slice(1)} ${top.length === 1 ? 'nationality' : 'nationalities'}`;
+    whoSentences.push(`${subject} made up ${formatPercent(share)} of small boat arrivals in the ${latestLabel}: ${list(top.map((n) => n.name))}.`);
   }
   if (ageSex && known(ageSex.male) && known(ageSex.female)) {
-    const when = whoSentences.length ? 'In the same year' : `In the ${latestLabel}`;
-    let s = `${when}, ${roughly(ageSex.male)} arrivals were recorded as male and ${roughly(ageSex.female)} as female`;
-    if (known(ageSex.under18)) s += `, and ${roughly(ageSex.under18)} as aged 17 or under`;
+    const when = whoSentences.length ? '' : `In the ${latestLabel}, `;
+    const sexes = [`${formatCount(ageSex.male)} arrivals were recorded as male`, `${formatCount(ageSex.female)} as female`];
+    if (known(ageSex.unknownSex) && ageSex.unknownSex > 0) sexes.push(`${formatCount(ageSex.unknownSex)} with sex not recorded`);
+    let s = `${when}${list(sexes)}`;
+    if (known(ageSex.under18)) s += `; ${formatCount(ageSex.under18)} were recorded as aged 17 or under`;
     whoSentences.push(`${s}.`);
   }
   $('who-summary').textContent = whoSentences.join(' ');
@@ -181,7 +180,7 @@ startFeature('small-boats', (data) => {
       { v: ageSex.female, label: 'recorded as female' },
       { v: ageSex.under18, label: 'recorded as aged 17 or under' },
     ].filter((t) => known(t.v));
-    $('who-tiles').append(tiles(ageTiles.map((t) => ({ value: roughly(t.v), label: t.label }))));
+    $('who-tiles').append(tiles(ageTiles.map((t) => ({ value: formatCount(t.v), label: t.label }))));
   } else {
     $('who-tiles').append(emptyNote());
   }
@@ -190,14 +189,12 @@ startFeature('small-boats', (data) => {
   const cohort = claimed.filter((c) => known(c.arrivals) && c.arrivals >= MIN_BASE).at(-1);
   if (cohort && known(cohort.asylumOnly)) {
     const both = known(cohort.asylumAndNrm) ? cohort.asylumAndNrm : null;
-    const parts = [];
-    if (both !== null) {
-      parts.push(`${formatPercent(cohort.asylumOnly + both)} claimed asylum, including ${formatPercent(both)} who were also referred as possible victims of modern slavery`);
-    } else {
-      parts.push(`${formatPercent(cohort.asylumOnly)} claimed asylum without a modern slavery referral`);
-    }
-    if (known(cohort.neither)) parts.push(`${formatPercent(cohort.neither)} did neither`);
-    $('claimed-summary').textContent = `Of people who arrived by small boat in ${cohort.year}, ${parts.join('; ')}.`;
+    const who = `of people who arrived by small boat in ${cohort.year}`;
+    const parts = both !== null
+      ? [`${formatPercent(cohort.asylumOnly + both)} ${who} claimed asylum.`, `${formatPercent(both)} of all arrivals also had a modern slavery referral.`]
+      : [`${formatPercent(cohort.asylumOnly)} ${who} claimed asylum without a modern slavery referral.`];
+    if (known(cohort.neither)) parts.push(`${formatPercent(cohort.neither)} did neither.`);
+    $('claimed-summary').textContent = parts.join(' ');
     $('claimed-bars-title').textContent = `What people arriving by small boat in ${cohort.year} did`;
     const rows = [
       { label: 'Asylum claim only', value: cohort.asylumOnly },
@@ -227,25 +224,33 @@ startFeature('small-boats', (data) => {
   const rYears = returns?.years ?? [];
   const rl = rYears.length - 1;
   if (rl >= 0 && known(returns.enforced[rl]) && known(returns.voluntary[rl])) {
-    let s = `There were ${roughly(returns.voluntary[rl])} voluntary returns and ${roughly(returns.enforced[rl])} enforced returns from the UK in the ${rYears[rl].label}`;
-    const clauses = [];
+    returnSentences.push(
+      `There were ${formatCount(returns.voluntary[rl])} voluntary and ${formatCount(returns.enforced[rl])} enforced returns from the UK in the ${rYears[rl].label}${rYears[rl].provisional ? ' (provisional)' : ''}.`,
+    );
     const c = rl > 0 ? change(returns.enforced[rl], returns.enforced[rl - 1]) : null;
-    if (c) clauses.push(c === 'unchanged' ? 'unchanged on a year earlier' : `${c} on a year earlier`);
+    const yearOn = c === null ? null : c === 'unchanged' ? 'unchanged on a year earlier' : `${c} on a year earlier`;
+    let start = null;
+    let side = null;
     if (rl > 1 && known(returns.enforced[0])) {
       const then = returns.enforced[0];
       const now = returns.enforced[rl];
-      const side = now > then ? 'above' : now < then ? 'below' : 'level with';
-      clauses.push(`${side} their level in the ${rYears[0].label} (${formatCount(then)})`);
+      side = now > then ? 'above' : now < then ? 'below' : 'level with';
+      start = `${side} the ${formatCount(then)} of the ${rYears[0].label}, when the series starts`;
     }
-    if (clauses.length) s += `; enforced returns were ${clauses.join(' and ')}`;
-    returnSentences.push(`${s}.`);
+    if (yearOn || start) {
+      // "up … but below" / "down … but above" contrast; otherwise "and".
+      const contrast = (c?.startsWith('up') && side === 'below') || (c?.startsWith('down') && side === 'above');
+      const clauses = [yearOn, start].filter(Boolean).join(contrast ? ' but ' : ' and ');
+      returnSentences.push(`Enforced returns were ${clauses}.`);
+    }
   }
   const quarters = smallBoatReturns?.quarters ?? [];
   if (quarters.length >= 4 && known(smallBoatReturns.latestYear)) {
     const from = quarters.at(-4);
     const to = quarters.at(-1);
     const span = `${from.label.split(' to ')[0]} ${from.key.slice(0, 4)} to ${to.label.split(' to ').at(-1)}`;
-    returnSentences.push(`${formatCount(smallBoatReturns.latestYear)} people who arrived by small boat were returned in the last four quarters (${span}).`);
+    const sameYear = to.key === `${rYears[rl]?.year} Q2`;
+    returnSentences.push(`${formatCount(smallBoatReturns.latestYear)} people who arrived by small boat were returned in the ${sameYear ? 'same year' : 'last four quarters'} (${span}).`);
   }
   $('returns-summary').textContent = returnSentences.join(' ');
 

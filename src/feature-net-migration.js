@@ -77,8 +77,7 @@ startFeature('net-migration', (data) => {
     const prev = last - 4;
     if (prev >= 0 && isNum(net.all[prev])) {
       const before = net.all[prev];
-      const direction = n > before ? 'Up' : n < before ? 'Down' : 'Level';
-      parts.push(`${direction} ${direction === 'Level' ? 'with' : 'from'} ${roughly(before)} a year earlier.`);
+      parts.push(`A year earlier it was ${roughly(before)}.`);
     }
     if (p.newMethod && current.length > 1) {
       const peak = peakOf(net.all, current);
@@ -137,21 +136,20 @@ startFeature('net-migration', (data) => {
     const p = periods[at];
     const b = net.british[at];
     const parts = [];
+    const flows = isNum(emi.british?.[at]) && isNum(imm.british?.[at]) ? `: ${deps(emi.british[at])} left to live abroad and ${deps(imm.british[at])} arrived` : '';
     if (b < 0) {
       const leaving = idx.map((i) => -net.british[i]);
       const most = leaving.indexOf(Math.max(...leaving));
-      const tail = idx.length < 2 ? '.' : most === leaving.length - 1 ? ', the most on current methods.' : `. The most on current methods was ${roughly(leaving[most])}, in the ${periods[idx[most]].label}.`;
-      parts.push(`In the ${p.label}, ${roughly(-b)} more British nationals left the UK than arrived${tail}`);
+      const isMost = idx.length > 1 && most === leaving.length - 1;
+      const later = idx.length > 1 && !isMost ? ` The most on current methods was ${roughly(leaving[most])}, in the ${periods[idx[most]].label}.` : '';
+      parts.push(`In the ${p.label}, ${roughly(-b)} more British nationals left the UK than arrived${isMost ? ', the most on current methods' : ''}${flows}.${later}`);
     } else if (b > 0) {
-      parts.push(`In the ${p.label}, ${roughly(b)} more British nationals arrived in the UK than left.`);
+      parts.push(`In the ${p.label}, ${roughly(b)} more British nationals arrived in the UK than left${flows}.`);
     } else {
-      parts.push(`In the ${p.label}, about as many British nationals arrived in the UK as left.`);
+      parts.push(`In the ${p.label}, about as many British nationals arrived in the UK as left${flows}.`);
     }
-    if (isNum(emi.british?.[at]) && isNum(imm.british?.[at])) parts.push(`In all, ${deps(emi.british[at])} left to live abroad and ${deps(imm.british[at])} arrived.`);
-    const others = [];
-    if (isNum(net.euPlus?.[at])) others.push(`EU+ nationals: ${balance(net.euPlus[at])}`);
-    if (isNum(net.nonEuPlus?.[at])) others.push(`non-EU+ nationals: ${balance(net.nonEuPlus[at])}`);
-    if (others.length) parts.push(`${others.join('; ').replace(/^e/, 'E')}.`);
+    if (isNum(net.euPlus?.[at])) parts.push(`EU+ nationals: ${balance(net.euPlus[at])}.`);
+    if (isNum(net.nonEuPlus?.[at])) parts.push(`Non-EU+ nationals: ${balance(net.nonEuPlus[at])}.`);
     $('groups-summary').textContent = parts.join(' ');
 
     if (idx.length > 1) {
@@ -210,14 +208,9 @@ startFeature('net-migration', (data) => {
     const clauses = ['study', 'work']
       .filter((k) => isNum(ri[k]?.[lastR]) && ri[k][lastR] >= MIN)
       .sort((a, b) => ri[b][lastR] - ri[a][lastR])
-      .map((k) => `${roughly(ri[k][lastR])} ${k === 'study' ? 'came to study' : 'came to work'}`);
+      .map((k, i) => `${roughly(ri[k][lastR])} ${i === 0 ? 'came ' : ''}to ${k}`);
     if (isNum(all) && clauses.length) parts.push(`Of the ${roughly(all)} non-EU+ nationals who arrived in the ${p.label}, ${clauses.join(' and ')}.`);
     else if (clauses.length) parts.push(`In the ${p.label}, ${clauses.join(' and ')} (non-EU+ nationals).`);
-    const ranked = keys.filter((k) => isNum(ri[k][lastR])).sort((a, b) => ri[b][lastR] - ri[a][lastR]);
-    if (ranked.length > 1 && ri[ranked[0]][lastR] > ri[ranked[1]][lastR] && ri[ranked[0]][lastR] >= MIN) {
-      const top = ranked[0];
-      parts.push(top === 'other' ? 'Other reasons are the largest group.' : `${NAMES[top][0].toUpperCase()}${NAMES[top].slice(1)} is the largest reason.`);
-    }
     const currentR = rp.map((q, i) => (q.key >= '2021-06' ? i : -1)).filter((i) => i >= 0);
     if (Array.isArray(ri.work) && currentR.length > 1 && currentR.includes(lastR)) {
       const peak = peakOf(ri.work, currentR);
@@ -277,15 +270,25 @@ startFeature('net-migration', (data) => {
     let first = `In the ${p.label}, ${deps(wd)} people arrived as dependants of work visa holders`;
     if (currentR.length > 1 && currentR.includes(lastR)) {
       const peak = peakOf(ri.workDependant, currentR);
-      first += peak === lastR ? ', the most on current methods.' : `, against ${roughly(ri.workDependant[peak])} at the peak in the ${rp[peak].label}.`;
+      first +=
+        peak === lastR
+          ? ', the most on current methods.'
+          : ri.workDependant[peak] === wd
+            ? `, level with the peak in the ${rp[peak].label}.`
+            : `, down from ${roughly(ri.workDependant[peak])} at the peak in the ${rp[peak].label}.`;
     } else first += '.';
     const parts = [first];
     if (isNum(ri.studyDependant?.[lastR])) {
       const sd = ri.studyDependant[lastR];
-      parts.push(sd === 0 ? 'Fewer than 500 study dependants arrived.' : `Study dependants numbered ${roughly(sd)}.`);
-    }
-    if (isNum(rn.studyDependant?.[lastR]) && rn.studyDependant[lastR] < 0) {
-      parts.push(`More former study dependants now leave than arrive: ${roughly(-rn.studyDependant[lastR])} more left than came.`);
+      const sn = rn.studyDependant?.[lastR];
+      const netClause = !isNum(sn)
+        ? ''
+        : sn < 0
+          ? `, and ${roughly(-sn)} more study dependants left than arrived`
+          : sn > 0
+            ? `, and ${roughly(sn)} more arrived than left`
+            : ', and about as many left as arrived';
+      parts.push(`${sd === 0 ? 'Fewer than 500' : roughly(sd)} arrived as dependants of students${netClause}.`);
     }
     $('dependants-summary').textContent = parts.join(' ');
 
@@ -327,8 +330,21 @@ startFeature('net-migration', (data) => {
     } else {
       parts.push(`Net migration for the ${rev.label} was first published as ${roughly(first.net)} and now stands at ${roughly(latest.net)}: revised ${diff < 0 ? 'down' : 'up'} by ${roughly(Math.abs(diff))}.`);
       const britishChange = isNum(first.british) && isNum(latest.british) ? latest.british - first.british : null;
-      if (britishChange !== null && Math.abs(britishChange) > Math.abs(diff) / 2 && isNum(first.britishEmigration) && isNum(latest.britishEmigration) && first.britishEmigration !== latest.britishEmigration) {
-        parts.push(`Most of the change came from British emigration, revised ${latest.britishEmigration > first.britishEmigration ? 'up' : 'down'} from ${roughly(first.britishEmigration)} to ${roughly(latest.britishEmigration)}.`);
+      // How much of the net revision the British net revision accounts for.
+      const share = britishChange === null ? 0 : britishChange / diff;
+      if (share > 0.5) {
+        const lead = share >= 0.9 ? 'Almost all of it' : 'Most of it';
+        const outflow = first.british <= 0 && latest.british <= 0;
+        const moved = outflow
+          ? `their net outflow was revised from ${roughly(-first.british)} to ${roughly(-latest.british)}`
+          : `their net migration was revised from ${signedCount(first.british)} to ${signedCount(latest.british)}`;
+        // "Mainly because" only when the emigration revision pushes the same way and covers over half of it.
+        const emiChange = isNum(first.britishEmigration) && isNum(latest.britishEmigration) ? latest.britishEmigration - first.britishEmigration : null;
+        const because =
+          emiChange !== null && -emiChange / britishChange > 0.5
+            ? `, mainly because British emigration was ${emiChange > 0 ? 'raised' : 'lowered'} from ${roughly(first.britishEmigration)} to ${roughly(latest.britishEmigration)}`
+            : '';
+        parts.push(`${lead} came from British nationals: ${moved}${because}.`);
       }
     }
     $('revisions-summary').textContent = parts.join(' ');

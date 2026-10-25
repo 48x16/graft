@@ -12,9 +12,9 @@ export const formatCount = (v) => (v === null || v === undefined ? 'not publishe
 export const formatPercent = (v) => (Math.abs(v) < 0.1 ? percent1.format(v) : percent.format(v));
 /** +12% / −3%. */
 export const formatChange = (v) => signed.format(v);
-/** 1.2 million, 175,000, 12,345: rounded for prose (2 s.f. in millions, the nearest 1,000 from 10,000). */
+/** 30.3 million, 175,000, 12,345: rounded for prose (one decimal in millions, the nearest 1,000 from 10,000). Compared figures in one sentence share a precision: all roughly() or all exact. */
 export function roughly(v) {
-  if (Math.abs(v) >= 1e6) return `${Number((v / 1e6).toPrecision(2))} million`;
+  if (Math.abs(v) >= 1e6) return `${(v / 1e6).toFixed(1)} million`;
   if (Math.abs(v) >= 1e4) return count.format(Math.round(v / 1e3) * 1e3);
   return count.format(v);
 }

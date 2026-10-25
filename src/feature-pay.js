@@ -26,6 +26,9 @@ function upDown(change) {
 /** Region names that take "the" mid-sentence (the North East, the East). */
 const place = (name) => (/^(North|South|East|West)\b/.test(name) && name !== 'Northern Ireland' ? `the ${name}` : name);
 
+/** Capitalises the first letter, for a name at the start of a sentence. */
+const cap = (s) => s[0].toUpperCase() + s.slice(1);
+
 /** Industry names as they read mid-sentence. */
 function industryName(i) {
   if (i.code === 'T-U') return 'households as employers and extraterritorial organisations';
@@ -52,7 +55,7 @@ startFeature('pay', (data) => {
   // Hero tiles.
   const heroTiles = [];
   if (ok(ashe.ukFullTimeWeekly)) heroTiles.push({ value: pounds(ashe.ukFullTimeWeekly), label: `a week: UK full-time median, April ${asheYear}` });
-  if (ok(ashe.ukFullTimeAnnual)) heroTiles.push({ value: poundsRough(ashe.ukFullTimeAnnual), label: `a year: UK full-time median, tax year to April ${asheYear}` });
+  if (ok(ashe.ukFullTimeAnnual)) heroTiles.push({ value: poundsRough(ashe.ukFullTimeAnnual), label: `a year: UK full-time median for the tax year to April ${asheYear}` });
   if (last >= 0 && ok(rti.medianMonthly[last])) heroTiles.push({ value: pounds(rti.medianMonthly[last]), label: `a month: median of all PAYE employees, ${months[last].label} (flash)` });
   $('hero-graphic').append(heroTiles.length ? tiles(heroTiles) : emptyNote());
 
@@ -60,13 +63,13 @@ startFeature('pay', (data) => {
   const headline = [];
   if (ok(ashe.ukFullTimeWeekly)) {
     const change = ok(ashe.ukFullTimeWeeklyChange) ? `, ${upDown(ashe.ukFullTimeWeeklyChange)} on a year earlier` : '';
-    const annual = ok(ashe.ukFullTimeAnnual) ? `, or roughly ${poundsRough(ashe.ukFullTimeAnnual)} over the tax year to April ${asheYear}` : '';
-    headline.push(`The typical full-time employee in the UK earned ${pounds(ashe.ukFullTimeWeekly)} a week in April ${asheYear}${change}${annual}.`);
+    headline.push(`The typical full-time employee in the UK earned ${pounds(ashe.ukFullTimeWeekly)} a week in April ${asheYear}${change}.`);
   }
+  if (ok(ashe.ukFullTimeAnnual)) headline.push(`The full-time median for the tax year to April ${asheYear} was ${poundsRough(ashe.ukFullTimeAnnual)}.`);
   if (last >= 0 && ok(rti.medianMonthly[last])) {
     const before = months.findIndex((m) => m.key === yearBefore(months[last].key));
     const change = before >= 0 && ok(rti.medianMonthly[before]) && rti.medianMonthly[before] > 0
-      ? `, ${upDown(rti.medianMonthly[last] / rti.medianMonthly[before] - 1)} on a year before`
+      ? `, ${upDown(rti.medianMonthly[last] / rti.medianMonthly[before] - 1)} on a year earlier`
       : '';
     headline.push(`Across all PAYE employees, full-time and part-time, median monthly pay was ${pounds(rti.medianMonthly[last])} in ${months[last].label} (flash estimate)${change}.`);
   }
@@ -96,10 +99,10 @@ startFeature('pay', (data) => {
     const top = regions[0];
     const bottom = regions.at(-1);
     const gap = top.weekly / bottom.weekly - 1;
-    const second = regions.length >= 3 ? ` ${place(regions[1].name).replace(/^the/, 'The')} came next, at ${pounds(regions[1].weekly)}.` : '';
+    const second = regions.length >= 3 ? ` ${cap(place(regions[1].name))} was second, at ${pounds(regions[1].weekly)}.` : '';
+    const more = gap < 0.0005 ? `the same as ${place(bottom.name)}, the lowest` : `${formatPercent(gap)} more than ${place(bottom.name)}, the lowest at ${pounds(bottom.weekly)}`;
     $('region-summary').textContent =
-      `The full-time median was highest in ${place(top.name)} (${pounds(top.weekly)} a week in April ${asheYear}) and lowest in ${place(bottom.name)} (${pounds(bottom.weekly)}), ` +
-      `so the median in ${place(top.name)} was ${formatPercent(gap)} higher.${second}`;
+      `${cap(place(top.name))} had the highest full-time median in April ${asheYear}, ${pounds(top.weekly)} a week: ${more}.${second}`;
     const scale = Math.max(top.weekly, ok(ashe.ukFullTimeWeekly) ? ashe.ukFullTimeWeekly : 0);
     $('region-bars').append(
       markedBars(
@@ -184,7 +187,7 @@ startFeature('pay', (data) => {
     const hi = industries[0];
     const lo = industries.at(-1);
     payroll.push(
-      `By industry, median monthly pay ranged from ${pounds(lo.medianMonthly)} in ${industryName(lo)} to ${pounds(hi.medianMonthly)} in ${industryName(hi)}; monthly pay includes part-time work, which pulls some industries down.`,
+      `Median monthly pay by industry ran from ${pounds(lo.medianMonthly)} in ${industryName(lo)} to ${pounds(hi.medianMonthly)} in ${industryName(hi)}. Monthly pay includes part-time work, which pulls some industries down.`,
     );
   }
   $('payroll-summary').textContent = payroll.join(' ');
