@@ -199,8 +199,13 @@ async function fetchCurrent(dir) {
   if (!asheUrl) throw new Error(`No ashetable3 zip linked on ${ASHE_PAGE}`);
   const rtiUrl = findLinks(await fetchText(RTI_PAGE), RTI_PAGE, RTI_FILE)[0];
   if (!rtiUrl) throw new Error(`No rtisa*.xlsx linked on ${RTI_PAGE}`);
-  const zipName = decodeURIComponent(new URL(asheUrl).pathname).split('/').pop();
-  const rtiName = decodeURIComponent(new URL(rtiUrl).pathname).split('/').pop();
+  // ONS links name the file in a query (/file?uri=/…/ashetable32026provisional.zip), not the path.
+  const fileName = (u) => {
+    const url = new URL(u);
+    return decodeURIComponent(url.searchParams.get('uri') ?? url.pathname).split('/').pop();
+  };
+  const zipName = fileName(asheUrl);
+  const rtiName = fileName(rtiUrl);
   // Drop older editions so the newest is unambiguous, and re-extract the ASHE tables.
   for (const f of await readdir(dir)) {
     if ((ASHE_ZIP.test(f) && f !== zipName) || (RTI_FILE.test(f) && f !== rtiName)) await rm(join(dir, f));

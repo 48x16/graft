@@ -115,6 +115,7 @@ function footer(site, page) {
             <h2 class="govuk-visually-hidden">About the data</h2>
             <p class="govuk-body-s">Source${ids.length > 1 ? 's' : ''}: ${ids.map((id) => credit(site, id)).join('; ')}.</p>
             ${licenceLines(site, ids)}
+            ${ids.map((id) => site.sources[id].notice).filter(Boolean).map((n) => `<p class="govuk-body-s">${esc(n)}</p>`).join('\n')}
             <p class="govuk-body-s">This site is not affiliated with or endorsed by ${esc(publishers)}. Groupings and wording are our own, explained on each page.</p>
           </div>
         </div>

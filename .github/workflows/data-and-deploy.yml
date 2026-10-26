@@ -1,0 +1,70 @@
+# Downloads the Home Office, ONS and HM Land Registry data, builds the site and deploys it to
+# GitHub Pages at graft.richyork.co.uk.
+#
+# Runs weekly (the sources publish monthly or quarterly, so the site updates within a week of a
+# release), on every push to main, and by hand from the Actions tab.
+#
+# If a publisher changes a file's shape or renames it, its pipeline throws, the deploy job never
+# runs, and the live site keeps its last good data. GitHub emails you when a scheduled run fails.
+
+name: Data and deploy
+
+on:
+  schedule:
+    - cron: '0 7 * * 1' # Mondays 07:00 UTC
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+# Never run two deploys at once, but don't cancel one that's already deploying.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+          cache: npm
+
+      - run: npm ci
+
+      - name: Unit tests
+        run: npm test
+
+      - uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
+      # Every source in pipeline/sources/, downloaded fresh. Busy publishers (ONS answers 429)
+      # are retried with backoff in pipeline/lib/fetch.js.
+      - name: Download and build the data
+        run: npm run data
+
+      - name: Build
+        run: npm run build
+
+      - uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      pages: write # to deploy to Pages
+      id-token: write # to prove the deploy comes from this workflow (OIDC)
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@368f82528645a54fb793d4d04e342629a3f51346 # v5.0.1

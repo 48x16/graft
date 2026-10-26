@@ -4,7 +4,8 @@
 //
 // A page: { file, kind: 'feature' | 'tool', title, standfirst, icon, sources, ready }
 // - icon: a Lucide icon name in kebab case (https://lucide.dev/icons), e.g. 'briefcase'.
-// - sources: ids from `sources` below; the footer credits each one.
+// - sources: ids from `sources` below; the footer credits each one, with any `notice` the
+//   publisher asks for (e.g. HM Land Registry, OS boundaries).
 // - ready: a selector that exists only once the page's data has drawn (the e2e test waits on it).
 
 export default {
@@ -27,8 +28,8 @@ export default {
     'ons-population': { publisher: 'Office for National Statistics', title: 'Population estimates for the UK, mid-year', url: 'https://www.ons.gov.uk/peoplepopulationandcommunity/populationandmigration/populationestimates/datasets/populationestimatesforukenglandandwalesscotlandandnorthernireland', licence: 'ogl' },
     'ons-gdhi': { publisher: 'Office for National Statistics', title: 'Gross disposable household income by local authority', url: 'https://www.ons.gov.uk/economy/regionalaccounts/grossdisposablehouseholdincome/datasets/regionalgrossdisposablehouseholdincomelocalauthorities', licence: 'ogl' },
     'hac-580': { publisher: 'House of Commons Home Affairs Committee', title: 'The Home Office’s management of asylum accommodation (HC 580, October 2025)', url: 'https://publications.parliament.uk/pa/cm5901/cmselect/cmhaff/580/report.html', licence: 'ogl' },
-    'lr-hpi': { publisher: 'HM Land Registry', title: 'UK House Price Index', url: 'https://www.gov.uk/government/collections/uk-house-price-index-reports', licence: 'ogl' },
-    'ons-geography': { publisher: 'Office for National Statistics', title: 'Local authority district boundaries (Open Geography Portal; contains OS data © Crown copyright and database right)', url: 'https://geoportal.statistics.gov.uk/', licence: 'ogl' },
+    'lr-hpi': { publisher: 'HM Land Registry', title: 'UK House Price Index', url: 'https://www.gov.uk/government/collections/uk-house-price-index-reports', licence: 'ogl', notice: 'Contains HM Land Registry data © Crown copyright and database right 2026. This data is licensed under the Open Government Licence v3.0.' },
+    'ons-geography': { publisher: 'Office for National Statistics', title: 'Local authority district boundaries (Open Geography Portal)', url: 'https://geoportal.statistics.gov.uk/', licence: 'ogl', notice: 'Contains OS data © Crown copyright and database right 2026.' },
   },
   pages: [
     { file: 'jobs.html', kind: 'feature', title: 'Who Works', standfirst: 'Fifty years of work, worklessness and unfilled jobs, from the official surveys.', icon: 'hard-hat', sources: ['ons-labour', 'ons-vacancies'], ready: '#rate-table tbody tr' },
